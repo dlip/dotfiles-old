@@ -1,5 +1,6 @@
 {
     "files.autoSave": "onFocusChange",
     "explorer.confirmDragAndDrop": false,
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "git.enableSmartCommit": true
 }
