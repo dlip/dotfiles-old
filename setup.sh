@@ -39,7 +39,7 @@ function create_symlink () {
     run "ln -s \"$FROM\" \"$TO\""
 }
 
-#Create symlinks for all files except those in $IGNORE_FILES
+# Create symlinks for all files except those in $IGNORE_FILES
 for FILE in $DIR/*; do
     BASE_FILENAME=$(basename $FILE)
     if ( ! array_contains IGNORE_FILES $BASE_FILENAME ); then
@@ -47,7 +47,7 @@ for FILE in $DIR/*; do
     fi
 done
 
-#OS Specific symlinks
+# OS Specific symlinks
 case $(uname) in
   'Linux')
     ;;
@@ -58,3 +58,13 @@ case $(uname) in
     create_symlink $DIR/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
     ;;
 esac
+
+# Install Visual Studio Code extensions
+if which -s code; then
+    echo "Installing Visual Studio Code extensions..."
+    for EXTENSION in $(cat vscode/extensions | tr '\n' ' '); do
+        run "code --install-extension $EXTENSION"
+    done
+else
+    echo "Visual Studio Code doesn't exist, skipping extension installation"
+fi
