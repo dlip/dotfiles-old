@@ -1,0 +1,5 @@
+{
+    "files.autoSave": "onFocusChange",
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editor.enablePreview": false
+}
