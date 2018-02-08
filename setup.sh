@@ -42,7 +42,7 @@ function create_symlink () {
 # Create symlinks for all files except those in $IGNORE_FILES
 for FILE in $DIR/*; do
     BASE_FILENAME=$(basename $FILE)
-    if ( ! array_contains IGNORE_FILES $BASE_FILENAME ); then
+    if ! array_contains IGNORE_FILES $BASE_FILENAME; then
         create_symlink $FILE $HOME/.$BASE_FILENAME 
     fi
 done
@@ -62,8 +62,18 @@ esac
 # Install Visual Studio Code extensions
 if which -s code; then
     echo "Installing Visual Studio Code extensions..."
-    for EXTENSION in $(cat vscode/extensions | tr '\n' ' '); do
-        run "code --install-extension $EXTENSION"
+    INSTALL_EXTENSIONS=(`cat vscode/extensions | tr '\n' ' '`)
+    EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
+
+    for EXTENSION in "${INSTALL_EXTENSIONS[@]}"; do
+        if (! array_contains EXISTING_EXTENSIONS $EXTENSION); then
+            run "code --install-extension $EXTENSION"
+        fi
+    done
+    for EXTENSION in "${EXISTING_EXTENSIONS[@]}"; do
+        if (! array_contains INSTALL_EXTENSIONS $EXTENSION); then
+            run "code --uninstall-extension $EXTENSION"
+        fi
     done
 else
     echo "Visual Studio Code doesn't exist, skipping extension installation"
