@@ -33,10 +33,12 @@ function array_contains () {
 function create_symlink () {
     FROM=$1
     TO=$2
-    if [ -e "$TO" ]; then
+    if [ -e "$TO" ] && [ "$(readlink $TO)" != "$FROM" ]; then
         run "rm -rf \"$TO\""
     fi
-    run "ln -s \"$FROM\" \"$TO\""
+    if [ ! -e "$TO" ]; then
+        run "ln -s \"$FROM\" \"$TO\""
+    fi
 }
 
 # Create symlinks for all files except those in $IGNORE_FILES
@@ -50,6 +52,8 @@ done
 # OS Specific symlinks
 case $(uname) in
   'Linux')
+    run "mkdir -p $HOME/.config/Code/User"
+    create_symlink $DIR/vscode/settings.json "$HOME/.config/Code/User/settings.json"
     ;;
   'WindowsNT')
     ;;
@@ -60,7 +64,7 @@ case $(uname) in
 esac
 
 # Install Visual Studio Code extensions
-if which -s code; then
+if which code &> /dev/null; then
     echo "Installing Visual Studio Code extensions..."
     INSTALL_EXTENSIONS=(`cat vscode/extensions | tr '\n' ' '`)
     EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)

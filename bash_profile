@@ -50,4 +50,5 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 export GOPATH=~/code/go
 export PATH=$GOPATH/bin:$PATH
 source set-proxy.sh
-source /dev/stdin <<<"$(gopass completion bash)"
+
+which gopass &> /dev/null && source /dev/stdin <<<"$(gopass completion bash)"
