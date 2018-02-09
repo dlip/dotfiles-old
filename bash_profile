@@ -1,5 +1,3 @@
-# Add `~/.bin` to the `$PATH`
-export PATH="$HOME/.bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -47,8 +45,3 @@ complete -W "NSGlobalDomain" defaults;
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
-export GOPATH=~/code/go
-export PATH=$GOPATH/bin:$PATH
-source set-proxy.sh
-
-which gopass &> /dev/null && source /dev/stdin <<<"$(gopass completion bash)"

@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Add `~/.bin` to the `$PATH`
+export PATH="$HOME/.bin:$PATH";
+
 # Make vim the default editor.
 export EDITOR='vim';
 
@@ -32,3 +35,8 @@ export MANPAGER='less -X';
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
 export GPG_TTY=$(tty);
+
+export GOPATH=~/code/go
+export PATH=$GOPATH/bin:$PATH
+
+source set-proxy.sh

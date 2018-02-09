@@ -1,0 +1,4 @@
+
+
+which gopass &> /dev/null && source /dev/stdin <<<"$(gopass completion bash)"
+
