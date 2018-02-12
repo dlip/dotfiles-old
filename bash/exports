@@ -38,5 +38,3 @@ export GPG_TTY=$(tty);
 
 export GOPATH=~/code/go
 export PATH=$GOPATH/bin:$PATH
-
-source set-proxy.sh

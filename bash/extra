@@ -1,4 +1,5 @@
 
 
+source set-proxy.sh
 which gopass &> /dev/null && source /dev/stdin <<<"$(gopass completion bash)"
 
