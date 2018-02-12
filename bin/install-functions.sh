@@ -32,14 +32,31 @@ function array_contains () {
   return $in
 }
 
+function unix_to_windows_path () {
+    echo $( echo "$1" | sed 's|^/\(.\)|\1:|' | sed 's|/|\\|g')
+}
+
 function create_symlink () {
     FROM=$1
     TO=$2
-    if [ -e "$TO" ] && [ "$(readlink "$TO")" != "$FROM" ]; then
-        run "rm -rf \"$TO\""
-    fi
-    if [ ! -e "$TO" ]; then
-        run "ln -s \"$FROM\" \"$TO\""
+    if [[ $(uname) =~ ^MINGW ]]; then
+        WIN_FROM=$(unix_to_windows_path "$FROM")
+        WIN_TO=$(unix_to_windows_path "$TO")
+        if [ -e "$TO" ]; then
+            run "rm -rf \"$TO\""
+        fi
+        if [ -d "$1" ]; then
+            run "cmd //c \"mklink /D $WIN_TO $WIN_FROM\""
+        else
+            run "cmd //c \"mklink $WIN_TO $WIN_FROM\""
+        fi
+    else
+        if [ -e "$TO" ] && [ "$(readlink "$TO")" != "$FROM" ]; then
+            run "rm -rf \"$TO\""
+        fi
+        if [ ! -e "$TO" ]; then
+            run "ln -s \"$FROM\" \"$TO\""
+        fi
     fi
 }
 

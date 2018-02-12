@@ -20,7 +20,9 @@ case $(uname) in
     create_dir "$HOME/.config/Code/User"
     create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
     ;;
-  'WindowsNT')
+  MINGW*)
+    create_dir "$APPDATA/Code/User"
+    create_symlink "$DOTFILES_DIR/vscode/settings.json" "$APPDATA/Code/User/settings.json"
     ;;
   'Darwin') 
     create_dir "$HOME/Library/Application Support/Code/User"
