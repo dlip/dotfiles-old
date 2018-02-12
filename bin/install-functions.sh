@@ -46,7 +46,7 @@ function create_symlink () {
             run "rm -rf \"$TO\""
         fi
         if [ -d "$1" ]; then
-            run "cmd //c \"mklink /D $WIN_TO $WIN_FROM\""
+            run "cmd //c \"mklink /J $WIN_TO $WIN_FROM\""
         else
             run "cmd //c \"mklink $WIN_TO $WIN_FROM\""
         fi

@@ -21,8 +21,8 @@ case $(uname) in
     create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
     ;;
   MINGW*)
-    create_dir "$APPDATA/Code/User"
-    create_symlink "$DOTFILES_DIR/vscode/settings.json" "$APPDATA/Code/User/settings.json"
+    create_dir "$APPDATA/Code"
+    create_symlink "$DOTFILES_DIR/vscode" "$APPDATA/Code/User"
     ;;
   'Darwin') 
     create_dir "$HOME/Library/Application Support/Code/User"
