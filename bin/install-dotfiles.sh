@@ -10,7 +10,7 @@ source $DIR/install-functions.sh
 for FILE in $DOTFILES_DIR/*; do
     BASE_FILENAME=$(basename $FILE)
     if ! array_contains IGNORE_FILES $BASE_FILENAME; then
-        create_symlink $FILE $HOME/.$BASE_FILENAME 
+        create_symlink $FILE $HOME/.$BASE_FILENAME
     fi
 done
 
@@ -24,11 +24,12 @@ case $(uname) in
     create_dir "$APPDATA/Code"
     create_symlink "$DOTFILES_DIR/vscode" "$APPDATA/Code/User"
     ;;
-  'Darwin') 
+  'Darwin')
     create_dir "$HOME/Library/Application Support/Code/User"
     create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
    ;;
 esac
 
 $DIR/install-bash-it.sh $1
+$DIR/install-tpm.sh $1
 $DIR/install-vscode-extensions.sh $1

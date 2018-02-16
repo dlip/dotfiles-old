@@ -188,7 +188,7 @@
 	insteadOf = "gist:"
 [user]
 	name = Dane Lipscombe
-	email = dane.lipscombe@cba.com.au
+	email = dane@lipscombe.com.au
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -198,3 +198,5 @@
 	helper = cache --timeout=2592000
 [http]
 	sslVerify = false
+[include]
+    path = .gitconfig.local

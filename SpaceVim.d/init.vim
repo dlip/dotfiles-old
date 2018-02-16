@@ -17,8 +17,13 @@ call SpaceVim#layers#load('lang#swig')
 call SpaceVim#layers#load('lang#tmux')
 call SpaceVim#layers#load('lang#vim')
 call SpaceVim#layers#load('lang#xml')
-call SpaceVim#layers#load('shell')   
+call SpaceVim#layers#load('shell')
 call SpaceVim#layers#load('tools#screensaver')
+call SpaceVim#layers#load('tmux')
+let g:spacevim_custom_plugins = [
+\ ['tpope/vim-obsession'],
+\ ['Hackworth/vim-ps1'],
+\ ]
 let g:spacevim_enable_vimfiler_welcome = 1
 let g:spacevim_enable_debug = 1
 let g:deoplete#auto_complete_delay = 150
@@ -28,10 +33,10 @@ let g:spacevim_enable_os_fileformat_icon = 1
 let g:spacevim_buffer_index_type = 1
 let g:neomake_vim_enabled_makers = []
 if executable('vimlint')
-    call add(g:neomake_vim_enabled_makers, 'vimlint') 
+    call add(g:neomake_vim_enabled_makers, 'vimlint')
 endif
 if executable('vint')
-    call add(g:neomake_vim_enabled_makers, 'vint') 
+    call add(g:neomake_vim_enabled_makers, 'vint')
 endif
 if has('python3')
     let g:ctrlp_map = ''
@@ -39,3 +44,16 @@ if has('python3')
 endif
 let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
+
+" Use system clipboard
+set clipboard=unnamed
+autocmd InsertLeave * write
+
+set tabstop=2
+set smarttab
+set shiftwidth=2
+set autoindent
+set expandtab
+set autoread
+
+au BufNewFile,BufRead *.ps1,*.psc1,*.psm1 setf ps1
