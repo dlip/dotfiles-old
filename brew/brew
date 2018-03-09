@@ -1,0 +1,20 @@
+bazel
+buck
+cdrtools
+cntlm
+docker-compose
+git
+gnupg
+go
+jenkins
+jq
+ncdu
+neovim
+node
+packer
+qemu --with-sdl2
+tmux
+vault
+vim --with-override-system-vi
+watchman
+wget

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-IGNORE_FILES=(README.md vscode)
+IGNORE_FILES=(README.md vscode brew)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $DIR/install-functions.sh
