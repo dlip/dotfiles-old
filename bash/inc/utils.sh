@@ -1,15 +1,16 @@
-DRY_RUN=$1
+function dotfiles_dir() {
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    DIR="$(dirname $DIR)"
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    if [ -L $DIR ]; then
+        DIR="$(readlink $DIR)"
+    fi
 
-if [ -L $DIR ]; then
-    DIR="$(readlink $DIR)"
-fi
+    DOTFILES_DIR="$(dirname $DIR)"
+    echo -n $DOTFILES_DIR
+}
 
-DOTFILES_DIR="$(dirname $DIR)"
-
-function run
-{
+function run() {
     if [ "$DRY_RUN" == "--dryrun" ]; then
         echo "DRY_RUN: $1"
     else

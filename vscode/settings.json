@@ -65,5 +65,6 @@
         "<C-f>": false
     },
     "workbench.editor.enablePreview": false,
-    "vsnotes.defaultNotePath": "/Users/lipscoda/Documents/notes"
+    "vsnotes.defaultNotePath": "/Users/lipscoda/Documents/notes",
+    "git.autofetch": true
 }

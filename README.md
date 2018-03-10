@@ -14,7 +14,7 @@
 https://github.com/dlip/dotfiles.git
 cd dotfiles
 # Check what it will change
-bin/install-dotfiles.sh --dryrun
+./install.sh --dryrun
 # Install for real
-bin/install-dotfiles.sh
+./install.sh
 ```

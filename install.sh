@@ -2,6 +2,5 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-for f in $(ls $DIR/inc/); 
-    do source $DIR/inc/$f; 
-done
+source $DIR/bash/functions
+dotfiles_install $@
