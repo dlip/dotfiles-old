@@ -27,14 +27,21 @@ function vscode_install_extensions() {
                 run "code --install-extension $EXTENSION"
             fi
         done
-        for EXTENSION in "${EXISTING_EXTENSIONS[@]}"; do
-            if (! array_contains INSTALL_EXTENSIONS $EXTENSION); then
-                run "code --uninstall-extension $EXTENSION"
-            fi
-        done
     else
         echo "Visual Studio Code doesn't exist, skipping extension installation"
     fi
+}
+
+function vscode_cleanup_extensions() {
+    # Remove Visual Studio Code extensions not in extensions file
+    INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/nolink/vscode/extensions | tr '\n' ' '`)
+    EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
+
+    for EXTENSION in "${EXISTING_EXTENSIONS[@]}"; do
+        if (! array_contains INSTALL_EXTENSIONS $EXTENSION); then
+            run "code --uninstall-extension $EXTENSION"
+        fi
+    done
 }
 
 vscode_save_extensions() {
