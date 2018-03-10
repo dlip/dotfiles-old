@@ -52,7 +52,7 @@ function create_symlink () {
             run "cmd //c \"mklink $WIN_TO $WIN_FROM\""
         fi
     else
-        if [ -e "$TO" ] && [ "$(readlink "$TO")" != "$FROM" ]; then
+        if [ -f "$TO" ] || [ -d "$TO" ] || [ -h "$TO" ] && [ "$(readlink "$TO")" != "$FROM" ]; then
             run "rm -rf \"$TO\""
         fi
         if [ ! -e "$TO" ]; then

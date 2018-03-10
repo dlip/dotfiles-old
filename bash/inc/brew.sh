@@ -1,12 +1,17 @@
 function brew_install() {
-    if ! which brew &> /dev/null; then
-        run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
-    fi
+    case $(uname) in
+        'Darwin')
+        if ! which brew &> /dev/null; then
+            run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+        fi
 
-    run "brew bundle --file='$(dotfiles_dir)/Brewfile'"
+        run "brew bundle --file='$(dotfiles_dir)/nolink/Brewfile'"
+            ;;
+    esac
+    
 }
 
 function brew_save() {
     run "rm -f '$(dotfiles_dir)/Brewfile'"
-    run "brew bundle dump --file='$(dotfiles_dir)/Brewfile'"
+    run "brew bundle dump --file='$(dotfiles_dir)/nolink/Brewfile'"
 }
