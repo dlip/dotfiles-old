@@ -4,6 +4,12 @@ bashit_install() {
   fi
 }
 
+bashit_enable_completion() {
+  bash-it enable completion all
+  bash-it disable completion conda
+  bash-it disable completion ng
+}
+
 bashit_update() {
     run "cd $HOME/.bash_it && git pull"
 }

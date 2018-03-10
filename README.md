@@ -17,4 +17,6 @@ cd dotfiles
 ./install.sh --dryrun
 # Install for real
 ./install.sh
+# Start a new shell
+bashit_enable_completion
 ```

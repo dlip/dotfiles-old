@@ -65,3 +65,8 @@ create_dir () {
         run "mkdir -p $1"
     fi
 }
+
+function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
+}
