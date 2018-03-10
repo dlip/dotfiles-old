@@ -17,7 +17,6 @@ function run() {
         echo $1
         eval $1
     fi
-
 }
 
 function array_contains () {

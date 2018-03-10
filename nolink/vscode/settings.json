@@ -22,15 +22,15 @@
         {
             "before": ["k","j"],
             "after": ["<Esc>"]
+        },
+        {
+            "before": ["j","k"],
+            "after": ["<Esc>"]
         }
     ],
     "vim.otherModesKeyBindingsNonRecursive": [
         {
-            "before": ["<leader>","d"],
-            "after": ["d", "d"]
-        },
-        {
-            "before":["<C-n>"],
+            "before":["<Esc>"],
             "after":[],
             "commands": [
                 {
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "before": [":"],
+            "before": [";"],
             "after": [],
             "commands": [
                 {
@@ -49,15 +49,15 @@
             ]
         },
         {
-            "before": ["<leader>","<tab>"],
+            "before": ["<leader>","p"],
             "after": [],
             "commands": [
                 {
-                    "command": "workbench.action.openNextRecentlyUsedEditorInGroup",
+                    "command": "projectManager.listProjectsNewWindow",
                     "args": []
                 }
             ]
-        },
+        }
     ],
     "vim.leader": "<space>",
     "vim.handleKeys":{

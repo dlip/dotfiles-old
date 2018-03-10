@@ -1,0 +1,7 @@
+[
+  {
+    "key": "alt+cmd+p",
+    "command": "projectManager.listProjectsNewWindow",
+    "when": "editorTextFocus"
+  }
+]

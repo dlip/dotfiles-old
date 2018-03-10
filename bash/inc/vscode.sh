@@ -1,18 +1,18 @@
 function vscode_install() {
   case $(uname) in
     'Linux')
-      create_dir "$HOME/.config/Code/User"
-      create_symlink "$(dotfiles_dir)/nolink/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
+      VSCODE_DIR="$HOME/.config/Code/User"
       ;;
     MINGW*)
-      create_dir "$APPDATA/Code"
-      create_symlink "$(dotfiles_dir)/nolink/vscode" "$APPDATA/Code/User"
+      VSCODE_DIR="$APPDATA/Code"
       ;;
     'Darwin')
-      create_dir "$HOME/Library/Application Support/Code/User"
-      create_symlink "$(dotfiles_dir)/nolink/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+      VSCODE_DIR="$HOME/Library/Application Support/Code/User"
     ;;
   esac
+  create_dir "$VSCODE_DIR"
+  create_symlink "$(dotfiles_dir)/nolink/vscode" "$VSCODE_DIR"
+
   vscode_install_extensions
 }
 
