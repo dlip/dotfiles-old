@@ -118,7 +118,7 @@
   lg = log --graph
 
   # log with one line per item.
-  lo = log --oneline
+  lo = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 
   # log with patch generation.
   lp = log --patch
