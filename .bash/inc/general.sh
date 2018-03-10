@@ -203,3 +203,9 @@ unhide_all() {
         eval "mv \"$i\" \"`echo "$i" | sed 's/^\.//g'`\""
     done
 }
+
+hide_all() {
+    for i in *; do
+        eval "mv \"$i\" \".$i\""
+    done
+}

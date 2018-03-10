@@ -39,10 +39,10 @@
   aa = add --all
 
   # add by patch - looks at each change, and asks if we want to put it in the repo.
-  # ap = add --patch
+  ap = add --patch
 
   # add just the files that are updated.
-  # au = add --update
+  au = add --update
 
   ### branch ###
 

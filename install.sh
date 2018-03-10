@@ -2,5 +2,5 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source $DIR/bash/functions
+source $DIR/.bash/functions
 dotfiles_install $@
