@@ -11,7 +11,7 @@
     "git.enableSmartCommit": true,
     "http.proxyStrictSSL": false,
     "keyboard.dispatch": "keyCode",
-    "terminal.integrated.fontFamily": "'DejaVu Sans Mono for Powerline'",
+    "terminal.integrated.fontFamily": "'DroidSansMonoForPowerlinePlusNerdFileTypesMono'",
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,

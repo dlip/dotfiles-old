@@ -7,6 +7,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DIR/install-functions.sh
 $DIR/install-bash-it.sh $1
 $DIR/install-tpm.sh $1
+$DIR/install-spacevim.sh $1
 $DIR/install-vscode-extensions.sh $1
 case $(uname) in
   'Darwin')
