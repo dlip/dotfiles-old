@@ -15,9 +15,16 @@ function dotfiles_install() {
 
   # Create symlinks for all files except those in $IGNORE_FILES
   for FILE in $(dotfiles_dir)/*; do
-      BASE_FILENAME=$(basename $FILE)
-      if ! array_contains IGNORE_FILES $BASE_FILENAME; then
-          create_symlink $FILE $HOME/.$BASE_FILENAME
-      fi
+    BASE_FILENAME=$(basename $FILE)
+    if ! array_contains IGNORE_FILES $BASE_FILENAME; then
+      create_symlink $FILE $HOME/.$BASE_FILENAME
+    fi
   done
+}
+
+function dotfiles_update() {
+  bashit_update
+  tpm_update
+  spacevim_update
+  brew_update
 }

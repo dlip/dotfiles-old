@@ -3,3 +3,7 @@ function spacevim_install() {
     run 'curl -sLf https://spacevim.org/install.sh | bash'
   fi
 }
+
+function spacevim_update() {
+  run 'cd $HOME/.SpaceVim && git pull'
+}

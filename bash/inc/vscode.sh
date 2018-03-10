@@ -19,7 +19,6 @@ function vscode_install() {
 function vscode_install_extensions() {
     # Install Visual Studio Code extensions
     if which code &> /dev/null; then
-        echo "Installing Visual Studio Code extensions..."
         INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/nolink/vscode/extensions | tr '\n' ' '`)
         EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
 
