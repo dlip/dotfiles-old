@@ -52,5 +52,9 @@ for file in ~/.bash/{functions,path,exports,aliases,completion}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
+if [ -e $HOME/.proxy_enable ]; then
+	proxy_enable
+fi
+
 # Load Bash It
 source "$BASH_IT"/bash_it.sh

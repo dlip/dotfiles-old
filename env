@@ -1,3 +1,34 @@
 BASH_IT_HTTP_PROXY=http://127.0.0.1:3128
 BASH_IT_HTTPS_PROXY=http://127.0.0.1:3128
 BASH_IT_NO_PROXY=localhost, 127.0.0.*, 10.*, 192.168.*, *.cba, *.cbainet.com
+
+# Make vim the default editor.
+EDITOR=vim
+
+# Enable persistent REPL history for `node`.
+NODE_REPL_HISTORY=~/.node_history
+# Allow 32³ entries the default is 1000.
+NODE_REPL_HISTORY_SIZE=32768
+# Use sloppy mode by default, matching web browsers.
+NODE_REPL_MODE=sloppy
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+PYTHONIOENCODING=UTF-8
+
+# Increase Bash history size. Allow 32³ entries the default is 500.
+HISTSIZE=32768
+HISTFILESIZE=32768
+# Omit duplicates and commands that begin with a space from history.
+HISTCONTROL=ignoreboth
+
+# Prefer US English and use UTF-8.
+LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
+# Highlight section titles in manual pages.
+LESS_TERMCAP_md=\[\e[033m\]
+
+# Don’t clear the screen after quitting a manual page.
+MANPAGER=less -X
+
+GOPATH=~/code/go
