@@ -1,10 +1,18 @@
 #!/bin/bash
 
 set -e
-IGNORE_FILES=(README.md vscode brew)
+IGNORE_FILES=(README.md vscode Brewfile)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $DIR/install-functions.sh
+$DIR/install-bash-it.sh $1
+$DIR/install-tpm.sh $1
+$DIR/install-vscode-extensions.sh $1
+case $(uname) in
+  'Darwin')
+    $DIR/install-brew.sh $1
+   ;;
+esac
 
 # Create symlinks for all files except those in $IGNORE_FILES
 for FILE in $DOTFILES_DIR/*; do
@@ -29,7 +37,3 @@ case $(uname) in
     create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
    ;;
 esac
-
-$DIR/install-bash-it.sh $1
-$DIR/install-tpm.sh $1
-$DIR/install-vscode-extensions.sh $1
