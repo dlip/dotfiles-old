@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # Create a new directory and enter it
-function mkd() {
+mkd() {
     mkdir -p "$@" && cd "$_";
 }
 
 # Change working directory to the top-most Finder window location
-function cdf() { # short for `cdfinder`
+cdf() { # short for `cdfinder`
     cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
 }
 
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
-function targz() {
+targz() {
     local tmpFile="${@%/}.tar";
     tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
 
@@ -45,7 +45,7 @@ function targz() {
 }
 
 # Determine size of a file or total size of a directory
-function fs() {
+fs() {
     if du -b /dev/null > /dev/null 2>&1; then
         local arg=-sbh;
     else
@@ -61,13 +61,13 @@ function fs() {
 # Use Git’s colored diff when available
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
-    function diff() {
+    diff() {
         git diff --no-index --color-words "$@";
     }
 fi;
 
 # Create a data URL from a file
-function dataurl() {
+dataurl() {
     local mimeType=$(file -b --mime-type "$1");
     if [[ $mimeType == text/* ]]; then
         mimeType="${mimeType};charset=utf-8";
@@ -76,7 +76,7 @@ function dataurl() {
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
-function server() {
+server() {
     local port="${1:-8000}";
     sleep 1 && open "http://localhost:${port}/" &
     # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
@@ -86,7 +86,7 @@ function server() {
 
 # Start a PHP server from a directory, optionally specifying the port
 # (Requires PHP 5.4.0+.)
-function phpserver() {
+phpserver() {
     local port="${1:-4000}";
     local ip=$(ipconfig getifaddr en1);
     sleep 1 && open "http://${ip}:${port}/" &
@@ -94,7 +94,7 @@ function phpserver() {
 }
 
 # Compare original and gzipped file size
-function gz() {
+gz() {
     local origsize=$(wc -c < "$1");
     local gzipsize=$(gzip -c "$1" | wc -c);
     local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
@@ -104,7 +104,7 @@ function gz() {
 
 # Syntax-highlight JSON strings or files
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
+json() {
     if [ -t 0 ]; then # argument
         python -mjson.tool <<< "$*" | pygmentize -l javascript;
     else # pipe
@@ -113,12 +113,12 @@ function json() {
 }
 
 # Run `dig` and display the most useful info
-function digga() {
+digga() {
     dig +nocmd "$1" any +multiline +noall +answer;
 }
 
 # UTF-8-encode a string of Unicode symbols
-function escape() {
+escape() {
     printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u);
     # print a newline unless we’re piping the output to another program
     if [ -t 1 ]; then
@@ -128,7 +128,7 @@ function escape() {
 
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
-function getcertnames() {
+getcertnames() {
     if [ -z "${1}" ]; then
         echo "ERROR: No domain specified.";
         return 1;
@@ -162,7 +162,7 @@ function getcertnames() {
 
 # `s` with no arguments opens the current directory in Sublime Text, otherwise
 # opens the given location
-function s() {
+s() {
     if [ $# -eq 0 ]; then
         subl .;
     else
@@ -172,7 +172,7 @@ function s() {
 
 # `v` with no arguments opens the current directory in Vim, otherwise opens the
 # given location
-function v() {
+v() {
     if [ $# -eq 0 ]; then
         vim .;
     else
@@ -182,7 +182,7 @@ function v() {
 
 # `o` with no arguments opens the current directory, otherwise opens the given
 # location
-function o() {
+o() {
     if [ $# -eq 0 ]; then
         open .;
     else
@@ -194,11 +194,11 @@ function o() {
 # the `.git` directory, listing directories first. The output gets piped into
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
-function tre() {
+tre() {
     tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
-function unhide_all() {
+unhide_all() {
     for i in .*; do
         eval "mv \"$i\" \"`echo "$i" | sed 's/^\.//g'`\""
     done

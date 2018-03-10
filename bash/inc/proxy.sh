@@ -1,4 +1,4 @@
-function proxy_enable() {
+proxy_enable() {
     echo "Proxy enabled"
     if [ -e $HOME/.proxy_enable ]; then
         export NO_PROXY=$BASH_IT_NO_PROXY
@@ -17,7 +17,7 @@ function proxy_enable() {
     fi
 }
 
-function proxy_disable() {
+proxy_disable() {
     rm -f $HOME/.proxy_enable
     disable-proxy
 }

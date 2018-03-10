@@ -1,9 +1,9 @@
-function spacevim_install() {
+spacevim_install() {
   if [ ! -d $HOME/.SpaceVim ]; then
     run 'curl -sLf https://spacevim.org/install.sh | bash'
   fi
 }
 
-function spacevim_update() {
+spacevim_update() {
   run 'cd $HOME/.SpaceVim && git pull'
 }

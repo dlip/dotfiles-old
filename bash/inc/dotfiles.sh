@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function dotfiles_install() {
+dotfiles_install() {
   set -e
   set -u
   
@@ -22,7 +22,7 @@ function dotfiles_install() {
   done
 }
 
-function dotfiles_update() {
+dotfiles_update() {
   bashit_update
   tpm_update
   spacevim_update

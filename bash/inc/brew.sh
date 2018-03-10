@@ -1,4 +1,4 @@
-function brew_install() {
+brew_install() {
     case $(uname) in
         'Darwin')
         if ! which brew &> /dev/null; then
@@ -12,15 +12,15 @@ function brew_install() {
     
 }
 
-function brew_cleanup() {
+brew_cleanup() {
     run "brew bundle cleanup --force --file='$(dotfiles_dir)/nolink/Brewfile'"
 }
 
-function brew_save() {
+brew_save() {
     run "rm -f '$(dotfiles_dir)/nolink/Brewfile'"
     run "brew bundle dump --file='$(dotfiles_dir)/nolink/Brewfile'"
 }
 
-function brew_update() {
+brew_update() {
     run "brew upgrade"
 }

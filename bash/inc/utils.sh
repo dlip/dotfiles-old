@@ -1,4 +1,4 @@
-function dotfiles_dir() {
+dotfiles_dir() {
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     DIR="$(dirname $DIR)"
 
@@ -10,7 +10,7 @@ function dotfiles_dir() {
     echo -n $DOTFILES_DIR
 }
 
-function run() {
+run() {
     if [ "$DRY_RUN" == "--dryrun" ]; then
         echo "DRY_RUN: $1"
     else
@@ -19,7 +19,7 @@ function run() {
     fi
 }
 
-function array_contains () {
+array_contains () {
   local array="$1[@]"
   local seeking=$2
   local in=1
@@ -32,11 +32,11 @@ function array_contains () {
   return $in
 }
 
-function unix_to_windows_path () {
+unix_to_windows_path () {
     echo $( echo "$1" | sed 's|^/\(.\)|\1:|' | sed 's|/|\\|g')
 }
 
-function create_symlink () {
+create_symlink () {
     FROM=$1
     TO=$2
     if [[ $(uname) =~ ^MINGW ]]; then
@@ -60,7 +60,7 @@ function create_symlink () {
     fi
 }
 
-function create_dir () {
+create_dir () {
     if [ ! -d "$1" ]; then
         run "mkdir -p $1"
     fi

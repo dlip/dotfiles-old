@@ -1,4 +1,4 @@
-function vscode_install() {
+vscode_install() {
   case $(uname) in
     'Linux')
       VSCODE_DIR="$HOME/.config/Code/User"
@@ -16,7 +16,7 @@ function vscode_install() {
   vscode_install_extensions
 }
 
-function vscode_install_extensions() {
+vscode_install_extensions() {
     # Install Visual Studio Code extensions
     if which code &> /dev/null; then
         INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/nolink/vscode/extensions | tr '\n' ' '`)
@@ -32,7 +32,7 @@ function vscode_install_extensions() {
     fi
 }
 
-function vscode_cleanup_extensions() {
+vscode_cleanup_extensions() {
     # Remove Visual Studio Code extensions not in extensions file
     INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/nolink/vscode/extensions | tr '\n' ' '`)
     EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
