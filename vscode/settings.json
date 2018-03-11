@@ -5,7 +5,7 @@
     "editor.renderWhitespace": "all",
     "editor.minimap.enabled": false,
     "editor.renderControlCharacters": true,
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "explorer.confirmDragAndDrop": false,
     "files.autoSave": "onFocusChange",
     "git.enableSmartCommit": true,

@@ -1,5 +1,4 @@
 proxy_enable() {
-    echo "Proxy enabled"
     if [ -e $HOME/.proxy_enable ]; then
         export NO_PROXY=$BASH_IT_NO_PROXY
         export ALL_PROXY=$BASH_IT_HTTP_PROXY

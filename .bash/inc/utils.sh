@@ -19,24 +19,24 @@ run() {
     fi
 }
 
-array_contains () {
-  local array="$1[@]"
-  local seeking=$2
-  local in=1
-  for element in "${!array}"; do
-    if [[ $element == $seeking ]]; then
-      in=0
-      break
-    fi
-  done
-  return $in
+array_contains() {
+    local array="$1[@]"
+    local seeking=$2
+    local in=1
+    for element in "${!array}"; do
+        if [[ $element == $seeking ]]; then
+            in=0
+            break
+        fi
+    done
+    return $in
 }
 
-unix_to_windows_path () {
+unix_to_windows_path() {
     echo $( echo "$1" | sed 's|^/\(.\)|\1:|' | sed 's|/|\\|g')
 }
 
-create_symlink () {
+create_symlink() {
     FROM=$1
     TO=$2
     if [[ $(uname) =~ ^MINGW ]]; then
@@ -60,7 +60,7 @@ create_symlink () {
     fi
 }
 
-create_dir () {
+create_dir (){
     if [ ! -d "$1" ]; then
         run "mkdir -p \"$1\""
     fi
