@@ -16,9 +16,10 @@ dotfiles_install() {
 
 dotfiles_symlink() {
     # Create symlinks for all files except those in $IGNORE_FILES
+    IGNORE_FILES=(. .. .git)
     for FILE in $(dotfiles_dir)/.*; do
         BASE_FILENAME=$(basename $FILE)
-        if [ $BASE_FILENAME != "." ] && [ $BASE_FILENAME != ".." ]; then
+        if ! array_contains IGNORE_FILES $BASE_FILENAME; then
             create_symlink $FILE $HOME/$BASE_FILENAME
         fi
     done
