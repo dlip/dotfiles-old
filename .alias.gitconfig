@@ -19,6 +19,7 @@
   p = pull
   r = remote
   s = status
+  u = push
   w = whatchanged
 
   ##

@@ -62,7 +62,7 @@ create_symlink () {
 
 create_dir () {
     if [ ! -d "$1" ]; then
-        run "mkdir -p $1"
+        run "mkdir -p \"$1\""
     fi
 }
 
