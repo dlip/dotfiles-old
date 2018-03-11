@@ -12,6 +12,9 @@ proxy_enable() {
     else
         bash-it enable plugin proxy
         enable-proxy
+        if [ "$(uname)" == "Darwin" ]; then
+            networksetup -switchtolocation "Automatic"
+        fi
         touch $HOME/.proxy_enable
     fi
 }
@@ -19,4 +22,7 @@ proxy_enable() {
 proxy_disable() {
     rm -f $HOME/.proxy_enable
     disable-proxy
+    if [ "$(uname)" == "Darwin" ]; then
+        networksetup -switchtolocation "noproxy"
+    fi
 }
