@@ -1,14 +1,12 @@
 brew_install() {
-    case $(uname) in
-        'Darwin')
+    if [ "$(uname)" == "Darwin" ]; then
         if ! which brew &> /dev/null; then
             run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
         fi
         if ! brew bundle check --no-upgrade --file="$(dotfiles_dir)/Brewfile" &> /dev/null; then
             run "brew bundle --no-upgrade --file='$(dotfiles_dir)/Brewfile'"
         fi
-        ;;
-    esac
+    fi
     
 }
 

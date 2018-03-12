@@ -4,13 +4,12 @@ dotfiles_install() {
     set -e
     set -u
   
-    DRY_RUN=${1:-}
-
     bashit_install
     tpm_install
     spacevim_install
     vscode_install
     brew_install
+    plist_install
     dotfiles_symlink
 }
 

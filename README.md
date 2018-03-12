@@ -14,9 +14,10 @@
 https://github.com/dlip/dotfiles.git
 cd dotfiles
 # Check what it will change
-./install.sh --dryrun
+DRY_RUN=true ./install.sh
 # Install for real
 ./install.sh
-# Start a new shell
+# Start a new shell then
+# Enable bash completion
 bashit_enable_completion
 ```

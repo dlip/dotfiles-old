@@ -11,7 +11,8 @@ dotfiles_dir() {
 }
 
 run() {
-    if [ "$DRY_RUN" == "--dryrun" ]; then
+    DRY_RUN=${DRY_RUN:-false}
+    if [ "$DRY_RUN" == "true" ]; then
         echo "DRY_RUN: $1"
     else
         echo $1
