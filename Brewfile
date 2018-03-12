@@ -20,6 +20,7 @@ brew "tmux"
 brew "vault"
 brew "vim", args: ["with-override-system-vi"]
 brew "wget"
+cask "cord"
 cask "duplicati"
 cask "google-chrome"
 cask "iterm2"
