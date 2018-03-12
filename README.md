@@ -7,6 +7,7 @@
 * [VSCode](https://code.visualstudio.com/) package save/install
 * [Bash-it](https://github.com/Bash-it/bash-it) for bash config
 * [SpaceVim](https://spacevim.org/) for vim config
+* [Homebrew](https://brew.sh/) for Mac pacage save/install
 
 ## Installation
 
