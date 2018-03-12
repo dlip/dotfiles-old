@@ -2,6 +2,9 @@
 
 # source env file
 dotenv "$HOME/.env"
+if [ -f "$HOME/.local.env" ]; then
+    dotenv "$HOME/.local.env"
+fi
 
 # Add gopath/bin to path
 export PATH=$GOPATH/bin:$PATH

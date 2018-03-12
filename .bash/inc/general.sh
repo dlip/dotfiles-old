@@ -209,3 +209,7 @@ hide_all() {
         eval "mv \"$i\" \".$i\""
     done
 }
+
+r() {
+    . ~/.bash_profile
+}
