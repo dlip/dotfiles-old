@@ -5,9 +5,8 @@ dotenv "$HOME/.env"
 if [ -f "$HOME/.local.env" ]; then
     dotenv "$HOME/.local.env"
 fi
-
 # Add gopath/bin to path
-export PATH=$GOPATH/bin:$PATH
+export PATH=$GOPATH/bin:/usr/local/bin:$PATH
 
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
