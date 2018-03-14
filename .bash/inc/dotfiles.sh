@@ -6,6 +6,7 @@ dotfiles_install() {
 
     gitconfig_install
     bashit_install
+    ohmyzsh_install
     tpm_install
     spacevim_install
     brew_install
@@ -27,6 +28,7 @@ dotfiles_symlink() {
 
 dotfiles_update() {
     bashit_update
+    ohmyzsh_update
     tpm_update
     spacevim_update
     brew_update

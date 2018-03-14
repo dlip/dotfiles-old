@@ -20,6 +20,7 @@ brew "tmux"
 brew "vault"
 brew "vim", args: ["with-override-system-vi"]
 brew "wget"
+brew "zsh"
 cask "cord"
 cask "duplicati"
 cask "flycut"

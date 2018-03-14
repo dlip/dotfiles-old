@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+DIR="$( cd "$( dirname "${(%):-%N}" )" && pwd )"
+
+for f in $(ls $DIR/inc/); do 
+    source $DIR/inc/$f; 
+done
