@@ -1,5 +1,5 @@
 
-for file in ~/.bash/{functions-zsh,exports,aliases}; do
+for file in ~/.bash/{functions,exports,aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 

@@ -12,7 +12,7 @@ dotfiles_dir() {
 
 run() {
     DRY_RUN=${DRY_RUN:-false}
-    if [ "$DRY_RUN" == "true" ]; then
+    if [ "$DRY_RUN" = "true" ]; then
         echo "DRY_RUN: $1"
     else
         echo $1
@@ -25,7 +25,7 @@ array_contains() {
     local seeking=$2
     local in=1
     for element in "${!array}"; do
-        if [[ $element == $seeking ]]; then
+        if [[ $element = $seeking ]]; then
             in=0
             break
         fi

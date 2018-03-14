@@ -11,7 +11,7 @@ vscode_install() {
     ;;
   esac
   create_dir "$VSCODE_DIR"
-  create_symlink "$(dotfiles_dir)/vscode" "$VSCODE_DIR"
+  create_symlink "$DOTFILES_DIR/vscode" "$VSCODE_DIR"
 
   vscode_install_extensions
 }
@@ -19,7 +19,7 @@ vscode_install() {
 vscode_install_extensions() {
     # Install Visual Studio Code extensions
     if which code &> /dev/null; then
-        INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/vscode/extensions | tr '\n' ' '`)
+        INSTALL_EXTENSIONS=(`cat $DOTFILES_DIR/vscode/extensions | tr '\n' ' '`)
         EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
 
         for EXTENSION in "${INSTALL_EXTENSIONS[@]}"; do
@@ -34,7 +34,7 @@ vscode_install_extensions() {
 
 vscode_cleanup_extensions() {
     # Remove Visual Studio Code extensions not in extensions file
-    INSTALL_EXTENSIONS=(`cat $(dotfiles_dir)/vscode/extensions | tr '\n' ' '`)
+    INSTALL_EXTENSIONS=(`cat $DOTFILES_DIR/vscode/extensions | tr '\n' ' '`)
     EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
 
     for EXTENSION in "${EXISTING_EXTENSIONS[@]}"; do
@@ -47,7 +47,7 @@ vscode_cleanup_extensions() {
 vscode_save_extensions() {
     if which code &> /dev/null; then
         echo "Saving Visual Studio Code extensions..."
-        code --list-extensions > "$(dotfiles_dir)/vscode/extensions"
+        code --list-extensions > "$DOTFILES_DIR/vscode/extensions"
     else
         echo "Visual Studio Code doesn't exist, can't save extensions"
     fi
