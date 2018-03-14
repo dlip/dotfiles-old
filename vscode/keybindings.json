@@ -1,7 +1,18 @@
 [
   {
-    "key": "alt+cmd+p",
-    "command": "projectManager.listProjectsNewWindow",
+    "key": "cmd+;",
+    "command": "projectManager.listProjectsNewWindow"
+  },{
+    "key": "alt+cmd+k",
+    "command": "bookmarks.jumpToPrevious",
+    "when": "editorTextFocus"
+  },{
+    "key": "alt+cmd+j",
+    "command": "bookmarks.jumpToNext",
+    "when": "editorTextFocus"
+  },{
+    "key": "alt+cmd+h",
+    "command": "bookmarks.toggle",
     "when": "editorTextFocus"
   }
 ]
