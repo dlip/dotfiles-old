@@ -4,7 +4,7 @@ brew_install() {
             run 'ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
         fi
         if ! brew bundle check --no-upgrade --file="$(dotfiles_dir)/Brewfile" &> /dev/null; then
-            run "brew bundle --no-upgrade --file='$(dotfiles_dir)/Brewfile'"
+            run "brew bundle --verbose --no-upgrade --file='$(dotfiles_dir)/Brewfile'"
         fi
     fi
     

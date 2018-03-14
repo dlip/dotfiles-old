@@ -3,7 +3,8 @@
 dotfiles_install() {
     set -e
     set -u
-  
+
+    gitconfig_install
     bashit_install
     tpm_install
     spacevim_install
