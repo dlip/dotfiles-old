@@ -1,5 +1,5 @@
 gitconfig_install() {
-    if [ ! -f "$(dotfiles_dir)/.local.gitconfig" ]; then
+    if [ ! -f "$DOTFILES_DIR/.local.gitconfig" ]; then
         run "gitconfig_create"
     fi
 }
