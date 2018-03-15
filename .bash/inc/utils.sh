@@ -1,15 +1,3 @@
-dotfiles_dir() {
-    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    DIR="$(dirname $DIR)"
-
-    if [ -L $DIR ]; then
-        DIR="$(readlink $DIR)"
-    fi
-
-    DOTFILES_DIR="$(dirname $DIR)"
-    echo -n $DOTFILES_DIR
-}
-
 run() {
     DRY_RUN=${DRY_RUN:-false}
     if [ "$DRY_RUN" = "true" ]; then
