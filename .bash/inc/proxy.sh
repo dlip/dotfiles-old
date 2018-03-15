@@ -2,6 +2,7 @@ proxy_print() {
     echo http_proxy=$http_proxy;
     echo https_proxy=$https_proxy;
     echo noproxy=$no_proxy
+    brew services list
 }
 
 proxy_enable() {
