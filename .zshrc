@@ -16,3 +16,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+if [ -e $HOME/.local.bash_profile ]; then
+    source $HOME/.local.bash_profile
+fi
