@@ -3,6 +3,7 @@ tap "caskroom/versions"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/services"
+brew "bash"
 brew "cdrtools"
 brew "cntlm", restart_service: true
 brew "git"
