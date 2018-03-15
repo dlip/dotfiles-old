@@ -11,6 +11,7 @@
     "git.enableSmartCommit": true,
     "http.proxyStrictSSL": false,
     "keyboard.dispatch": "keyCode",
+    "editor.fontFamily": "DroidSansMonoForPowerlinePlusNerdFileTypesMono",
     "terminal.integrated.fontFamily": "'DroidSansMonoForPowerlinePlusNerdFileTypesMono'",
     "vim.easymotion": true,
     "vim.sneak": true,
