@@ -31,8 +31,6 @@
 
     "vsnotes.defaultNotePath": "/Users/lipscoda/Documents/notes",
 
-    "window.restoreWindows": "all",
-
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,
@@ -90,5 +88,8 @@
     // Enable usage data and errors to be sent to Microsoft.
     "telemetry.enableTelemetry": false,
     // Enable crash reports to be sent to Microsoft.
-    "telemetry.enableCrashReporter": false
+    "telemetry.enableCrashReporter": false,
+
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 0
 }
