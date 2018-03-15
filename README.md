@@ -20,8 +20,24 @@ DRY_RUN=true ./install.sh
 # Install for real
 ./install.sh
 # Start a new shell
-# Enable bash completion
+
+# If you like bash:
+shell_bash
+# Enable all completions
 bashit_enable_completion
-# If you like zsh instead of bash
-chsh -s /bin/zsh
+
+# If you like zsh:
+shell_zsh
+
+# Configure your shell in .env file
+# Restart shell
 ```
+
+## Proxy
+
+- Cntlm configuration is in /usr/local/etc/cntlm.conf
+- After editing the configuration, run `brew services restart cntlm`
+- In .env file there are proxy settings to use cntlm eg. BASH_IT_HTTP_PROXY
+- Run `proxy_enable` to enable the proxy
+- On mac make a network location called 'noproxy' in network preferences
+- Run `proxy_disable` to disable the proxy
