@@ -11,6 +11,7 @@
     "editor.fontFamily": "DroidSansMonoForPowerlinePlusNerdFileTypesMono",
 
     "terminal.integrated.fontFamily": "'DroidSansMonoForPowerlinePlusNerdFileTypesMono'",
+    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
 
     "explorer.confirmDragAndDrop": false,
 
