@@ -32,8 +32,17 @@ shell_zsh
 # Configure your shell in .env file
 # Restart shell
 ```
+## Post-install Tasks
 
-## Proxy
+### iTerm2
+
+- Open iTerm2.
+- Select iTerm2 > Preferences.
+- Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
+- Press "Browse" and point it to `~/.iterm2`.
+- Restart iTerm2.
+
+### Proxy
 
 - Cntlm configuration is in /usr/local/etc/cntlm.conf
 - After editing the configuration, run `brew services restart cntlm`
