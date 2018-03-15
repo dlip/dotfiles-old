@@ -5,7 +5,7 @@ gitconfig_install() {
 }
 
 gitconfig_create() {
-    echo -n 'Enter Git user name: '
+    echo -n 'Enter Git full name: '
     read GIT_USER
     echo -n 'Enter Git email: '
     read GIT_EMAIL
