@@ -187,7 +187,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1835 110 659 259 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>866 820 796 473 0 0 2560 1440 </string>
+	<string>866 781 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 4 2560 1436 0 0 2560 1440 </string>
 	<key>New Bookmarks</key>
@@ -406,7 +406,7 @@
 				<real>1</real>
 			</dict>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>Recycle</string>
 			<key>Default Bookmark</key>
