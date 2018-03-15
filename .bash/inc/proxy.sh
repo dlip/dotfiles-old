@@ -1,3 +1,10 @@
+proxy_print() {
+    echo http_proxy=$http_proxy;
+    echo https_proxy=$https_proxy;
+    echo noproxy=$no_proxy
+    brew services list
+}
+
 proxy_enable() {
     export NO_PROXY=$BASH_IT_NO_PROXY
     export ALL_PROXY=$BASH_IT_HTTP_PROXY
@@ -28,6 +35,6 @@ proxy_disable() {
         disable-proxy
     fi
     if [ "$(uname)" = "Darwin" ]; then
-        networksetup -switchtolocation "noproxy" > /dev/null
+        networksetup -switchtolocation "No Proxy" > /dev/null
     fi
 }

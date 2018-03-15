@@ -2,17 +2,35 @@
     "editor.rulers": [
         80
     ],
+    "editor.renderIndentGuides": true,
+    "editor.scrollBeyondLastLine": false,
     "editor.renderWhitespace": "all",
     "editor.minimap.enabled": false,
     "editor.renderControlCharacters": true,
     "editor.tabSize": 4,
-    "explorer.confirmDragAndDrop": false,
-    "files.autoSave": "onFocusChange",
-    "git.enableSmartCommit": true,
-    "http.proxyStrictSSL": false,
-    "keyboard.dispatch": "keyCode",
     "editor.fontFamily": "DroidSansMonoForPowerlinePlusNerdFileTypesMono",
+
     "terminal.integrated.fontFamily": "'DroidSansMonoForPowerlinePlusNerdFileTypesMono'",
+
+    "explorer.confirmDragAndDrop": false,
+
+    "files.autoSave": "onFocusChange",
+
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    "http.proxyStrictSSL": false,
+
+    "keyboard.dispatch": "keyCode",
+
+    "workbench.startupEditor": "none",
+    "workbench.editor.enablePreview": false,
+    "workbench.commandPalette.preserveInput": true,
+
+    "vsnotes.defaultNotePath": "/Users/lipscoda/Documents/notes",
+
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,
@@ -65,7 +83,13 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "workbench.editor.enablePreview": false,
-    "vsnotes.defaultNotePath": "/Users/lipscoda/Documents/notes",
-    "git.autofetch": true
+
+    // Disable Telemetry
+    // Enable usage data and errors to be sent to Microsoft.
+    "telemetry.enableTelemetry": false,
+    // Enable crash reports to be sent to Microsoft.
+    "telemetry.enableCrashReporter": false,
+
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 0
 }

@@ -40,12 +40,22 @@ shell_zsh
 - Select iTerm2 > Preferences.
 - Under the General tab, check the box labeled "Load preferences from a custom folder or URL:"
 - Press "Browse" and point it to `~/.iterm2`.
+- Check 'Save changes to folder when iTerm2 quits' if you would like to save changes back to file
 - Restart iTerm2.
 
 ### Proxy
 
-- Cntlm configuration is in /usr/local/etc/cntlm.conf
+- Cntlm configuration is in `/usr/local/etc/cntlm.conf`
+    - If proxy requires password, run below to generate hash and copy to config file
+
+        ```sh
+        cntlm -H
+        # Or with path to config
+        cntlm -H -c /usr/local/etc/cntlm.conf
+        ```
+
 - After editing the configuration, run `brew services restart cntlm`
+- Check status of brew services with `brew services list`
 - In .env file there are proxy settings to use cntlm eg. BASH_IT_HTTP_PROXY
 - Run `proxy_enable` to enable the proxy
 - On mac make a network location called 'noproxy' in network preferences
