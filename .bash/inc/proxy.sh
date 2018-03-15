@@ -23,6 +23,7 @@ proxy_enable() {
 
 proxy_disable() {
     rm -f $HOME/.proxy_enable
+    unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY no_proxy all_proxy http_proxy https_proxy
     if [ -n "$BASH_VERSION" ]; then
         disable-proxy
     fi
