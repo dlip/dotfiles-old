@@ -26,6 +26,9 @@
 
     "keyboard.dispatch": "keyCode",
 
+    "projectManager.git.baseFolders": [
+        "/Users/lipscoda/code"
+    ],
     "workbench.startupEditor": "none",
     "workbench.editor.enablePreview": false,
     "workbench.commandPalette.preserveInput": true,

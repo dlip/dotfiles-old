@@ -21,6 +21,7 @@ vscode_install_extensions() {
     if which code &> /dev/null; then
         INSTALL_EXTENSIONS=(`cat $DOTFILES_DIR/vscode/extensions | tr '\n' ' '`)
         EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
+        EXISTING_EXTENSIONS=${EXISTING_EXTENSIONS:-()}
 
         for EXTENSION in "${INSTALL_EXTENSIONS[@]}"; do
             if (! array_contains EXISTING_EXTENSIONS $EXTENSION); then
@@ -36,6 +37,7 @@ vscode_cleanup_extensions() {
     # Remove Visual Studio Code extensions not in extensions file
     INSTALL_EXTENSIONS=(`cat $DOTFILES_DIR/vscode/extensions | tr '\n' ' '`)
     EXISTING_EXTENSIONS=(`code --list-extensions | tr '\n' ' '`)
+    EXISTING_EXTENSIONS=${EXISTING_EXTENSIONS:-()}
 
     for EXTENSION in "${EXISTING_EXTENSIONS[@]}"; do
         if (! array_contains INSTALL_EXTENSIONS $EXTENSION); then
