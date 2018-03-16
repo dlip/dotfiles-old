@@ -37,13 +37,18 @@
   },
   // Integrated Terminal Shortcuts
   {
-    "key": "ctrl+n",
+    "key": "cmd+n",
     "command": "workbench.action.terminal.new",
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+w",
+    "key": "cmd+w",
     "command": "workbench.action.terminal.kill",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+d",
+    "command": "workbench.action.terminal.split",
     "when": "terminalFocus"
   },
   {

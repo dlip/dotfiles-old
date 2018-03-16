@@ -34,3 +34,7 @@ POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯"
 
 source $ZSH/oh-my-zsh.sh
+
+if [ -e $HOME/.local.bash_profile ]; then
+    source $HOME/.local.bash_profile
+fi

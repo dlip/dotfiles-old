@@ -20,3 +20,7 @@ if function_exists __git_aliases; then
 			function_exists $complete_fnc && __git_complete g$al $complete_func
 	done
 fi
+
+if [ -e $HOME/.local.bash_profile ]; then
+    source $HOME/.local.bash_profile
+fi
