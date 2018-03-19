@@ -27,7 +27,8 @@
     "keyboard.dispatch": "keyCode",
 
     "projectManager.git.baseFolders": [
-        "/Users/lipscoda/code"
+        "/Users/lipscoda/code",
+        "/Users/changj2/src"
     ],
     "workbench.startupEditor": "none",
     "workbench.editor.enablePreview": false,
