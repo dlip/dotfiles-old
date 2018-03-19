@@ -5,6 +5,11 @@ proxy_print() {
     brew services list
 }
 
+proxy_unset() {
+    unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY no_proxy all_proxy http_proxy https_proxy
+    proxy_print
+}
+
 proxy_enable() {
     export NO_PROXY=$BASH_IT_NO_PROXY
     export ALL_PROXY=$BASH_IT_HTTP_PROXY
@@ -29,7 +34,7 @@ proxy_enable() {
 }
 
 proxy_disable() {
-    unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY no_proxy all_proxy http_proxy https_proxy
+    proxy_unset
 
     if [ -e $HOME/.proxy_enable ]; then
         rm -f $HOME/.proxy_enable
