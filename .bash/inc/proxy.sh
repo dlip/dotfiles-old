@@ -2,7 +2,14 @@ proxy_print() {
     echo http_proxy=$http_proxy;
     echo https_proxy=$https_proxy;
     echo noproxy=$no_proxy
-    brew services list
+    if [ "$(uname)" = "Darwin" ]; then
+        brew services list
+    fi
+}
+
+proxy_unset() {
+    unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY no_proxy all_proxy http_proxy https_proxy
+    proxy_print
 }
 
 proxy_enable() {
@@ -29,7 +36,7 @@ proxy_enable() {
 }
 
 proxy_disable() {
-    unset NO_PROXY ALL_PROXY HTTP_PROXY HTTPS_PROXY no_proxy all_proxy http_proxy https_proxy
+    proxy_unset
 
     if [ -e $HOME/.proxy_enable ]; then
         rm -f $HOME/.proxy_enable
