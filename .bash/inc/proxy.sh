@@ -2,7 +2,9 @@ proxy_print() {
     echo http_proxy=$http_proxy;
     echo https_proxy=$https_proxy;
     echo noproxy=$no_proxy
-    brew services list
+    if [ "$(uname)" = "Darwin" ]; then
+        brew services list
+    fi
 }
 
 proxy_unset() {
