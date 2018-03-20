@@ -23,7 +23,6 @@
     untrackedCache = true
     quotepath = false
     longpaths = true
-	pager = less -F -X
 
 [color]
 
