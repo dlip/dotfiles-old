@@ -96,8 +96,3 @@ cask "karabiner-elements"
 #
 # Other / Uncategorised / brew_save
 #
-brew "bash-completion"
-brew "bash-git-prompt"
-brew "groovy"
-brew "python"
-brew "rbenv"
