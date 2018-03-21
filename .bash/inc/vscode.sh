@@ -49,7 +49,11 @@ vscode_cleanup_extensions() {
 vscode_save_extensions() {
     if which code &> /dev/null; then
         echo "Saving Visual Studio Code extensions..."
-        code --list-extensions > "$DOTFILES_DIR/vscode/extensions"
+        code --list-extensions > "/tmp/extensions"
+        diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(sort $DOTFILES_DIR/vscode/extensions | grep -v "^#") <(sort /tmp/extensions) >> $DOTFILES_DIR/vscode/extensions
+        cd $DOTFILES_DIR
+        git diff vscode/extensions
+        cd - > /dev/null
     else
         echo "Visual Studio Code doesn't exist, can't save extensions"
     fi
