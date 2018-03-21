@@ -19,10 +19,10 @@ brew_save() {
     run "rm -f '/tmp/Brewfile'"
     run "brew bundle dump --file='/tmp/Brewfile'"
     # Append only the new entries in to the dotfiles Brewfile so we don't mess up categorisation
-    /usr/bin/diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(sort $DOTFILES_DIR/Brewfile | grep -v "^#") <(sort /tmp/Brewfile) >> $DOTFILES_DIR/Brewfile
+    diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(sort $DOTFILES_DIR/Brewfile | grep -v "^#") <(sort /tmp/Brewfile) >> $DOTFILES_DIR/Brewfile
     cd $DOTFILES_DIR
     git diff Brewfile
-    cd -
+    cd - > /dev/null
 }
 
 brew_update() {

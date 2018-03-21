@@ -58,10 +58,10 @@ fs() {
     fi;
 }
 
-# Use Git’s colored diff when available
+# Add 'alias' for Git’s colored diff when available but not overriding system diff
 hash git &>/dev/null;
 if [ $? -eq 0 ]; then
-    diff() {
+    gdiff() {
         git diff --no-index --color-words "$@";
     }
 fi;
