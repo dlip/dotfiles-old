@@ -15,8 +15,14 @@ brew_cleanup() {
 }
 
 brew_save() {
-    run "rm -f '$DOTFILES_DIR/Brewfile'"
-    run "brew bundle dump --file='$DOTFILES_DIR/Brewfile'"
+    # Generate the current Brewfile in a temporary location to diff
+    run "rm -f '/tmp/Brewfile'"
+    run "brew bundle dump --file='/tmp/Brewfile'"
+    # Append only the new entries in to the dotfiles Brewfile so we don't mess up categorisation
+    /usr/bin/diff --unchanged-line-format= --old-line-format= --new-line-format='%L' <(sort ~/src/sam/dotfiles/Brewfile | grep -v "^#") <(sort /tmp/Brewfile) >> $DOTFILES_DIR/Brewfile
+    cd $DOTFILES_DIR
+    git diff Brewfile
+    cd -
 }
 
 brew_update() {

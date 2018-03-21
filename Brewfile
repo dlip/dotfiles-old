@@ -1,39 +1,103 @@
+#
+# Brew taps
+#
 tap "caskroom/cask"
 tap "caskroom/versions"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "homebrew/services"
-brew "bash"
-brew "cdrtools"
-brew "cntlm", restart_service: true
-brew "git"
-brew "gnupg"
-brew "go"
-brew "gopass"
-brew "jq"
-brew "kubernetes-cli"
-brew "mono"
-brew "ncdu"
-brew "netcat"
-brew "node"
-brew "packer"
-brew "qemu", args: ["with-sdl2"]
-brew "tmux"
-brew "vault"
-brew "vim", args: ["with-override-system-vi"]
-brew "wget"
-brew "zsh"
-cask "cord"
-cask "duplicati"
-cask "flycut"
+
+#
+# Browsers
+#
+cask 'firefox'
 cask "google-chrome"
+
+#
+# Terminal / Shell
+#
 cask "iterm2"
-cask "karabiner-elements"
-cask "p4merge"
-cask "powershell"
+brew "zsh"
+brew "bash"
+brew "tmux"
+
+#
+# Commands
+#
+brew "netcat"
+brew "wget"
+brew "jq"
+brew "ncdu"
+brew "gnupg"
+
+#
+# Proxy
+#
+brew "cntlm", restart_service: true
+
+#
+# Editors
+#
+cask "visual-studio-code"
+brew "vim", args: ["with-override-system-vi"]
+
+#
+# Version Control
+#
+brew "git"
 cask "sourcetree"
+cask "p4merge"
+
+#
+# Microsoft
+#
+cask "powershell"
+brew "mono"
+
+#
+# Virtualisation
+#
 cask "vagrant"
 cask "virtualbox"
-cask "visual-studio-code"
+brew "packer"
+brew "qemu", args: ["with-sdl2"]
+brew "cdrtools"
+
+#
+# Docker
+#
 cask "caskroom/versions/docker-edge"
+brew "kubernetes-cli"
+
+#
+# Languages
+#
 cask "caskroom/versions/java8"
+brew "node"
+brew "go"
+
+#
+# Password Management
+#
+brew "gopass"
+brew "vault"
+
+#
+# Apps
+#
+cask "flycut"
+# Remote Desktop
+cask "cord"
+# Backup
+cask "duplicati"
+# Keyboard
+cask "karabiner-elements"
+
+#
+# Other / Uncategorised / brew_save
+#
+brew "bash-completion"
+brew "bash-git-prompt"
+brew "groovy"
+brew "python"
+brew "rbenv"
