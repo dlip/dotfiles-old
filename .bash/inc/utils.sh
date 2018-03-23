@@ -9,15 +9,22 @@ run() {
 }
 
 array_contains() {
-    local array="$1[@]"
     local seeking=$2
     local in=1
-    for element in "${!array}"; do
-        if [[ $element = $seeking ]]; then
+    if [ -n "$ZSH_VERSION" ]; then
+        local array=(${(P)${1}})
+        if [[ ${array[(ie)$seeking]} -le ${#array} ]]; then
             in=0
-            break
         fi
-    done
+    elif [ -n "$BASH_VERSION" ]; then
+        local array="$1[@]"
+        for element in "${!array}"; do
+            if [[ $element = $seeking ]]; then
+                in=0
+                break
+            fi
+        done
+    fi
     return $in
 }
 
