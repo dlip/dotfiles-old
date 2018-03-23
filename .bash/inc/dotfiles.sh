@@ -9,6 +9,7 @@ dotfiles_install() {
     ohmyzsh_install
     tpm_install
     spacevim_install
+    spacemacs_install
     brew_install
     vscode_install
     plist_install
