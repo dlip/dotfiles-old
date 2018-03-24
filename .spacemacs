@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     markdown
+     python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -38,15 +40,15 @@ values."
      ;; ----------------------------------------------------------------
      helm
      ;; auto-completion
-     ;; better-defaults
+     better-defaults
      emacs-lisp
-     ;; git
+     git
      ;; markdown
-     ;; org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      ;; syntax-checking
      ;; version-control
      )
@@ -82,6 +84,8 @@ values."
    ;; environment, otherwise it is strongly recommended to let it set to t.
    ;; This variable has no effect if Emacs is launched with the parameter
    ;; `--insecure' which forces the value of this variable to nil.
+   ;; Autosave files
+   dotspacemacs-autosave-file-directly t
    ;; (default t)
    dotspacemacs-elpa-https t
    ;; Maximum allowed time in seconds to contact an ELPA repository.
@@ -309,7 +313,232 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  )
+  ; Auto-save on vim escape
+  (add-hook 'evil-insert-state-exit-hook (lambda () (save-some-buffers t)))
+  (add-hook 'evil-operator-state-exit-hook (lambda () (save-some-buffers t)))
+
+  (defun copy-to-clipboard ()
+    "Copies selection to x-clipboard."
+    (interactive)
+    (if (display-graphic-p)
+        (progn
+          (message "Yanked region to x-clipboard!")
+          (call-interactively 'clipboard-kill-ring-save)
+          )
+      (if (region-active-p)
+          (progn
+            (shell-command-on-region (region-beginning) (region-end) "pbcopy")
+            (message "Yanked region to clipboard!")
+            (deactivate-mark))
+        (message "No region active; can't yank to clipboard!")))
+    )
+
+  (defun paste-from-clipboard ()
+    "Pastes from x-clipboard."
+    (interactive)
+    (if (display-graphic-p)
+        (progn
+          (clipboard-yank)
+          (message "graphics active")
+          )
+      (insert (shell-command-to-string "pbpaste"))
+      )
+    )
+  (evil-leader/set-key "o y" 'copy-to-clipboard)
+  (evil-leader/set-key "o p" 'paste-from-clipboard)
+
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (mmm-mode markdown-toc markdown-mode gh-md smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub let-alist with-editor yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode anaconda-mode pythonic unfill org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mwim htmlize gnuplot flyspell-correct-helm flyspell-correct auto-dictionary ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+ ;; https://github.com/jethrokuan/.emacs.d/blob/master/config.org#org-mode-for-gtd
+;; (require 'find-lisp)
+;; (setq jethro/org-agenda-directory "~/Documents/gtd/")
+;; (setq org-agenda-files
+;;       (find-lisp-find-files jethro/org-agenda-directory "\.org$"))
+
+;; (setq org-capture-templates
+;;       `(("i" "inbox" entry (file "~/Documents/gtd/inbox.org")
+;;          "* TODO %?")
+;;         ("p" "paper" entry (file "~/Documents/papers/papers.org")
+;;          "* TODO %(jethro/trim-citation-title \"%:title\")\n%a" :immediate-finish t)
+;;         ("e" "email" entry (file+headline "~/Documents/gtd/projects.org" "Emails")
+;;          "* TODO [#A] Reply: %a :@home:@school:" :immediate-finish t)
+;;         ("w" "Weekly Review" entry (file+olp+datetree "~/Documents/gtd/reviews.org")
+;;          (file "~/Documents/gtd/templates/weekly_review.org"))
+;;         ("s" "Snippet" entry (file "~/Documents/deft/capture.org")
+;;          "* Snippet %<%Y-%m-%d %H:%M>\n%?")))
+
+;; ;; (require 'org-agenda)
+;; (setq jethro/org-agenda-inbox-view
+;;       `("i" "Inbox" todo ""
+;;         ((org-agenda-files '("~/Documents/gtd/inbox.org")))))
+
+;; (setq jethro/org-agenda-someday-view
+;;       `("s" "Someday" todo ""
+;;         ((org-agenda-files '("~/Documents/gtd/someday.org")))))
+
+;; (setq org-todo-keywords
+;;       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+;;         (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
+
+;; (setq org-log-done 'time)
+;; (setq org-log-into-drawer t)
+
+;; (setq org-log-state-notes-insert-after-drawers nil)
+;; (setq org-tag-alist (quote (("@errand" . ?e)
+;;                             ("@office" . ?o)
+;;                             ("@home" . ?h)
+;;                             ("@school" . ?s)
+;;                             (:newline)
+;;                             ("WAITING" . ?w)
+;;                             ("HOLD" . ?H)
+;;                             ("CANCELLED" . ?c))))
+
+;; (setq org-fast-tag-selection-single-key nil)
+
+;; ;; https://github.com/syl20bnr/spacemacs/issues/3094
+;; (setq org-refile-use-outline-path 'file
+;;       org-outline-path-complete-in-steps nil)
+;; (setq org-refile-allow-creating-parent-nodes 'confirm)
+;; (setq org-refile-targets '(("next.org" :level . 0)
+;;                            ("someday.org" :level . 0)
+;;                            ("projects.org" :maxlevel . 1)))
+
+;; (defun jethro/org-rename-item ()
+;;   (interactive)
+;;   (save-excursion
+;;     (when (org-at-heading-p)
+;;       (let* ((hl-text (nth 4 (org-heading-components)))
+;;              (new-header (read-string "New Text: " nil nil hl-text)))
+;;         (unless (or (null hl-text)
+;;                     (org-string-match-p "^[ \t]*:[^:]+:$" hl-text))
+;;           (beginning-of-line)
+;;           (search-forward hl-text (point-at-eol))
+;;           (replace-string
+;;            hl-text
+;;            new-header
+;;            nil (- (point) (length hl-text)) (point)))))))
+
+;; (defun jethro/org-agenda-process-inbox-item (&optional goto rfloc no-update)
+;;   (interactive "P")
+;;   (org-with-wide-buffer
+;;    (org-agenda-set-tags)
+;;    (org-agenda-priority)
+;;    (org-agenda-set-effort)
+;;    (org-agenda-refile nil nil t)
+;;    ;; (org-mark-ring-push)
+;;    ;; (org-refile-goto-last-stored)
+;;    ;; (jethro/org-rename-item)
+;;    ;; (org-mark-ring-goto)
+;;    (org-agenda-redo)))
+
+;; (defun jethro/org-inbox-capture ()
+;;   "Capture a task in agenda mode."
+;;   (interactive)
+;;   (org-capture nil "i"))
+
+; (define-key org-agenda-mode-map "i" 'org-agenda-clock-in)
+; (define-key org-agenda-mode-map "r" 'jethro/org-agenda-process-inbox-item)
+; (define-key org-agenda-mode-map "R" 'org-agenda-refile)
+; (define-key org-agenda-mode-map "c" 'jethro/org-inbox-capture)
+
+; (defvar jethro/new-project-template
+;   "
+;     *Project Purpose/Principles*:
+
+;     *Project Outcome*:
+;     "
+;   "Project template, inserted when a new project is created")
+
+; (defvar jethro/is-new-project nil
+;   "Boolean indicating whether it's during the creation of a new project")
+
+; (defun jethro/refile-new-child-advice (orig-fun parent-target child)
+;   (let ((res (funcall orig-fun parent-target child)))
+;     (save-excursion
+;       (find-file (nth 1 parent-target))
+;       (goto-char (org-find-exact-headline-in-buffer child))
+;       (org-add-note)
+;       )
+;     res))
+
+; (advice-add 'org-refile-new-child :around #'jethro/refile-new-child-advice)
+
+; (defun jethro/set-todo-state-next ()
+;   "Visit each parent task and change NEXT states to TODO"
+;   (org-todo "NEXT"))
+
+; (add-hook 'org-clock-in-hook 'jethro/set-todo-state-next 'append)
+
+; (setq org-agenda-block-separator nil)
+; (setq org-agenda-start-with-log-mode t)
+; (setq jethro/org-agenda-todo-view
+;       `(" " "Agenda"
+;         ((agenda ""
+;                  ((org-agenda-span 'day)
+;                   (org-deadline-warning-days 365)))
+;          (todo "TODO"
+;                ((org-agenda-overriding-header "To Refile")
+;                 (org-agenda-files '("~/.org/gtd/inbox.org"))))
+;          (todo "NEXT"
+;                ((org-agenda-overriding-header "In Progress")
+;                 (org-agenda-files '("~/.org/gtd/someday.org"
+;                                     "~/.org/gtd/projects.org"
+;                                     "~/.org/gtd/next.org"))
+;                 ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))
+;                 ))
+;          (todo "TODO"
+;                ((org-agenda-overriding-header "Todo")
+;                 (org-agenda-files '("~/.org/gtd/projects.org"
+;                                     "~/.org/gtd/next.org"))
+;                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled))))
+;          nil)))
+
+; (defun jethro/org-agenda-skip-all-siblings-but-first ()
+;   "Skip all but the first non-done entry."
+;   (let (should-skip-entry)
+;     (unless (or (org-current-is-todo)
+;                 (not (org-get-scheduled-time (point))))
+;       (setq should-skip-entry t))
+;     (save-excursion
+;       (while (and (not should-skip-entry) (org-goto-sibling t))
+;         (when (org-current-is-todo)
+;           (setq should-skip-entry t))))
+;     (when should-skip-entry
+;       (or (outline-next-heading)
+;           (goto-char (point-max))))))
+
+; (defun org-current-is-todo ()
+;   (string= "TODO" (org-get-todo-state)))
+
+; (defun jethro/switch-to-agenda ()
+;   (interactive)
+;   (org-agenda nil " ")
+;   (delete-other-windows))
+
+; (bind-key "<f1>" 'jethro/switch-to-agenda)
+
+; (setq org-columns-default-format "%40ITEM(Task) %Effort(EE){:} %CLOCKSUM(Time Spent) %SCHEDULED(Scheduled) %DEADLINE(Deadline)")
+
+; (use-package org-pomodoro
+;   :bind
+;   (:map org-agenda-mode-map
+;         (("I" . org-pomodoro)))
+;   :config
+;   (setq org-pomodoro-format "%s"))
