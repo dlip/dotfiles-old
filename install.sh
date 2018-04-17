@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ZSH_VERSION=${ZSH_VERSION:-}
 if [ -n "$ZSH_VERSION" ]; then
     DIR="$( cd "$( dirname "${(%):-%N}" )" && pwd )"
 elif [ -n "$BASH_VERSION" ]; then

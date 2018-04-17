@@ -11,6 +11,7 @@ run() {
 array_contains() {
     local seeking=$2
     local in=1
+    ZSH_VERSION=${ZSH_VERSION:-}
     if [ -n "$ZSH_VERSION" ]; then
         local array=(${(P)${1}})
         if [[ ${array[(ie)$seeking]} -le ${#array} ]]; then
