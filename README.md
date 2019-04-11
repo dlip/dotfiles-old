@@ -43,6 +43,10 @@ shell_zsh
 - Check 'Save changes to folder when iTerm2 quits' if you would like to save changes back to file
 - Restart iTerm2.
 
+### VSCode
+
+Using extension called [Settings Sync](https://marketplace.visualstudio.com/itemdetails?itemName=Shan.code-settings-sync). You can create your own settings or fork my gist id [b099a72ddeb8f6579545e22057f0c093](https://gist.github.com/dlip/b099a72ddeb8f6579545e22057f0c093).
+
 ### Proxy
 
 - Cntlm configuration is in `/usr/local/etc/cntlm.conf`
