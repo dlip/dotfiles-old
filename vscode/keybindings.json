@@ -1,76 +1,96 @@
 [
-  {
-    "key": "cmd+;",
-    "command": "projectManager.listProjectsNewWindow"
-  },
-  {
-    "key": "alt+cmd+k",
-    "command": "bookmarks.jumpToPrevious",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "alt+cmd+j",
-    "command": "bookmarks.jumpToNext",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "alt+cmd+h",
-    "command": "bookmarks.toggle",
-    "when": "editorTextFocus"
-  },
-  // Show Git diff for current file
-  {
-    "key": "shift+cmd+l",
-    "command": "git.openChange"
-  },
-  // Show mardown preview to side
-  {
-    "key": "cmd+shift+v",
-    "command": "markdown.showPreviewToSide",
-    "when": "editorFocus"
-  },
-  // Duplicate of default: shift+alt+i
-  {
-    "key": "shift+cmd+i",
-    "command": "editor.action.insertCursorAtEndOfEachLineSelected",
-    "when": "editorTextFocus"
-  },
-  // Integrated Terminal Shortcuts
-  {
-    "key": "cmd+n",
-    "command": "workbench.action.terminal.new",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "cmd+w",
-    "command": "workbench.action.terminal.kill",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "cmd+d",
-    "command": "workbench.action.terminal.split",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "ctrl+tab",
-    "command": "workbench.action.terminal.focusNext",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "ctrl+shift+tab",
-    "command": "workbench.action.terminal.focusPrevious",
-    "when": "terminalFocus"
-  },
-  {
-    "key": "ctrl+`",
-    "command": "workbench.action.terminal.toggleTerminal"
-  },
-  {
-    "key": "ctrl+`",
-    "command": "-workbench.action.terminal.toggleTerminal"
-  },
-  {
-    "key": "alt+space",
-    "command": "workbench.action.terminal.focus"
-  }
+	{
+		"key": "cmd+;",
+		"command": "projectManager.listProjectsNewWindow"
+	},
+	{
+		"key": "alt+cmd+k",
+		"command": "bookmarks.jumpToPrevious",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+cmd+j",
+		"command": "bookmarks.jumpToNext",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+cmd+h",
+		"command": "bookmarks.toggle",
+		"when": "editorTextFocus"
+	},
+	// Show Git diff for current file
+	{
+		"key": "shift+cmd+l",
+		"command": "git.openChange"
+	},
+	// Show mardown preview to side
+	{
+		"key": "cmd+shift+v",
+		"command": "markdown.showPreviewToSide",
+		"when": "editorFocus"
+	},
+	// Duplicate of default: shift+alt+i
+	{
+		"key": "shift+cmd+i",
+		"command": "editor.action.insertCursorAtEndOfEachLineSelected",
+		"when": "editorTextFocus"
+	},
+	// Integrated Terminal Shortcuts
+	{
+		"key": "cmd+n",
+		"command": "workbench.action.terminal.new",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "cmd+w",
+		"command": "workbench.action.terminal.kill",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "cmd+d",
+		"command": "workbench.action.terminal.split",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+tab",
+		"command": "workbench.action.terminal.focusNext",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+shift+tab",
+		"command": "workbench.action.terminal.focusPrevious",
+		"when": "terminalFocus"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "alt+space",
+		"command": "workbench.action.terminal.focus"
+	},
+	{
+		"key": "cmd+enter",
+		"command": "workbench.action.debug.start",
+		"when": "!inDebugMode"
+	},
+	{
+		"key": "f5",
+		"command": "-workbench.action.debug.start",
+		"when": "!inDebugMode"
+	},
+	{
+		"key": "ctrl+k c",
+		"command": "toggleSuggestionDetails",
+		"when": "suggestWidgetVisible && textInputFocus"
+	},
+	{
+		"key": "ctrl+space",
+		"command": "-toggleSuggestionDetails",
+		"when": "suggestWidgetVisible && textInputFocus"
+	}
 ]

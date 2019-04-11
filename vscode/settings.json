@@ -1,31 +1,26 @@
 {
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "editor.renderControlCharacters": true,
+    "editor.renderIndentGuides": true,
+    "editor.renderWhitespace": "all",
     "editor.rulers": [
         80
     ],
-    "editor.renderIndentGuides": true,
     "editor.scrollBeyondLastLine": false,
-    "editor.renderWhitespace": "all",
-    "editor.minimap.enabled": false,
-    "editor.renderControlCharacters": true,
     "editor.tabSize": 4,
-    "editor.fontFamily": "DroidSansMonoForPowerlinePlusNerdFileTypesMono",
-
-    "terminal.integrated.fontFamily": "'DroidSansMonoForPowerlinePlusNerdFileTypesMono'",
-    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
-
     "explorer.confirmDragAndDrop": false,
-
     "files.autoSave": "onFocusChange",
-
-    "git.enableSmartCommit": true,
     "git.autofetch": true,
-
-    "diffEditor.ignoreTrimWhitespace": true,
-
+    "git.enableSmartCommit": true,
     "http.proxyStrictSSL": false,
-
     "keyboard.dispatch": "keyCode",
-
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "terminal.integrated.fontFamily": "'Fira Code'",
+    "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
     "projectManager.git.baseFolders": [
         "/Users/lipscoda/code",
         "/Users/changj2/src"
@@ -42,17 +37,7 @@
     "vim.useSystemClipboard": true,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["k","j"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["j","k"],
-            "after": ["<Esc>"]
-        }
-    ],
-    "vim.otherModesKeyBindingsNonRecursive": [
+    "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before":["<Esc>"],
             "after":[],
@@ -89,12 +74,6 @@
         "<C-f>": false
     },
 
-    // Disable Telemetry
-    // Enable usage data and errors to be sent to Microsoft.
-    "telemetry.enableTelemetry": false,
-    // Enable crash reports to be sent to Microsoft.
-    "telemetry.enableCrashReporter": false,
-
     "window.restoreWindows": "all",
-    "window.zoomLevel": 0
+    "window.zoomLevel": 1
 }

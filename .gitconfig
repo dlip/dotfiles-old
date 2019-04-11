@@ -112,7 +112,7 @@
 [credential]
     helper = cache --timeout=2592000
 [http]
-    sslVerify = false
+	sslVerify = true
 [include]
     path = .alias.gitconfig
     path = .local.gitconfig

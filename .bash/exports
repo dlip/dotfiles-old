@@ -5,23 +5,3 @@ dotenv "$HOME/.env"
 if [ -f "$HOME/.local.env" ]; then
     dotenv "$HOME/.local.env"
 fi
-# Add gopath/bin to path
-export PATH=$GOPATH/bin:/usr/local/bin:$PATH
-
-# Avoid issues with `gpg` as installed via Homebrew.
-# https://stackoverflow.com/a/42265848/96656
-export GPG_TTY=$(tty);
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
-# Path to your oh-my-zsh installation.
-ZSH=$HOME/.oh-my-zsh
-
-LESS_TERMCAP_mb=$(printf "\e[1;31m")
-LESS_TERMCAP_md=$(printf "\e[1;31m")
-LESS_TERMCAP_me=$(printf "\e[0m")
-LESS_TERMCAP_se=$(printf "\e[0m")
-LESS_TERMCAP_so=$(printf "\e[1;44;33m")
-LESS_TERMCAP_ue=$(printf "\e[0m")
-LESS_TERMCAP_us=$(printf "\e[1;32m")

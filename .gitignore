@@ -16,3 +16,6 @@ Thumbs.db
 /.local.env
 /.local.gitconfig
 /.local.bash_profile
+/vscode/*
+!/vscode/keybindings.json
+!/vscode/settings.json
