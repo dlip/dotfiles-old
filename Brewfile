@@ -1,141 +1,85 @@
-#
-# Brew taps
-#
 tap "caskroom/cask"
 tap "caskroom/versions"
 tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-
-#
-# Browsers
-#
-cask 'firefox'
-cask "google-chrome"
-
-#
-# Terminal / Shell
-#
-cask "iterm2"
-brew "zsh"
+tap "johanhaleby/kubetail"
 brew "bash"
-brew "tmux"
-
-#
-# Commands
-#
-brew "netcat"
-brew "wget"
-brew "jq"
-brew "ncdu"
-brew "gnupg"
-
-#
-# Proxy
-#
-brew "cntlm", restart_service: true
-
-#
-# Editors
-#
-cask "visual-studio-code"
-brew "vim", args: ["with-override-system-vi"]
-
-#
-# Version Control
-#
-brew "git"
-cask "sourcetree"
-cask "p4merge"
-
-#
-# Microsoft
-#
-cask "powershell"
-brew "mono"
-
-#
-# Virtualisation
-#
-cask "vagrant"
-cask "virtualbox"
-brew "packer"
-brew "qemu", args: ["with-sdl2"]
-brew "cdrtools"
-
-#
-# Docker
-#
-cask "caskroom/versions/docker-edge"
-brew "kubernetes-cli"
-
-#
-# Languages
-#
-cask "caskroom/versions/java8"
-brew "node"
-brew "go"
-
-#
-# Password Management
-#
-brew "gopass"
-brew "vault"
-
-#
-# Apps
-#
-cask "flycut"
-# Remote Desktop
-cask "cord"
-# Backup
-cask "duplicati"
-# Keyboard
-cask "karabiner-elements"
-
-#
-# Other / Uncategorised / brew_save
-#
 brew "ccat"
+brew "cdrtools"
+brew "cfssl"
+brew "cntlm", restart_service: true
+brew "corkscrew"
+brew "go"
+brew "dep"
+brew "openssl"
 brew "diffoscope"
 brew "emacs"
 brew "encfs"
+brew "git"
+brew "git-lfs"
+brew "gnupg"
+brew "gopass"
 brew "graphviz"
-brew "haskell-stack"
-brew "hugo"
+brew "htop"
 brew "imagemagick"
-brew "johanhaleby/kubetail/kubetail"
+brew "jq"
+brew "kubernetes-cli"
 brew "kubernetes-helm"
 brew "kustomize"
 brew "makefile2graph"
-brew "openssl"
+brew "mono"
+brew "ncdu"
+brew "netcat"
+brew "node"
+brew "openapi-generator"
 brew "p7zip"
+brew "packer"
 brew "pandoc"
 brew "pinentry-mac"
-brew "pulseaudio", restart_service: true
+brew "qemu", args: ["with-sdl2"]
 brew "skaffold"
-brew "todo-txt"
+brew "tmux"
 brew "unrar"
+brew "vault"
 brew "vifm"
 brew "vim", args: ["HEAD"]
 brew "watchman"
+brew "wget"
 brew "yarn"
 brew "youtube-dl"
-cask "calibre"
-cask "dbeaver-community"
-cask "docker-edge"
-cask "dropbox"
-cask "firefox"
-cask "google-cloud-sdk"
-cask "inkscape"
+brew "zsh"
+brew "johanhaleby/kubetail/kubetail"
 cask "java8"
-cask "krita"
-cask "mactex"
-cask "osxfuse"
-cask "skype-for-business"
-cask "veracrypt"
-cask "vlc"
-cask "xquartz"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
-tap "johanhaleby/kubetail"
+cask "p4merge"
+cask "caskroom/cask/anaconda"
+cask "caskroom/cask/cord"
+cask "caskroom/cask/dbeaver-community"
+cask "caskroom/cask/dropbox"
+cask "caskroom/cask/duplicati"
+cask "caskroom/cask/firefox"
+cask "caskroom/cask/flycut"
+cask "caskroom/cask/google-chrome"
+cask "caskroom/cask/google-cloud-sdk"
+cask "caskroom/cask/hyper"
+cask "caskroom/cask/inkscape"
+cask "caskroom/cask/iterm2"
+cask "caskroom/cask/karabiner-elements"
+cask "caskroom/cask/krita"
+cask "caskroom/cask/mactex"
+cask "caskroom/cask/ngrok"
+cask "caskroom/cask/osxfuse"
+cask "caskroom/cask/powershell"
+cask "caskroom/cask/skype-for-business"
+cask "caskroom/cask/sourcetree"
+cask "caskroom/cask/vagrant"
+cask "caskroom/cask/veracrypt"
+cask "caskroom/cask/virtualbox"
+cask "caskroom/cask/visual-studio-code"
+cask "caskroom/cask/vlc"
+cask "caskroom/cask/wkhtmltopdf"
+cask "caskroom/cask/xquartz"
+cask "caskroom/versions/docker-edge"
+cask "caskroom/versions/microsoft-remote-desktop-beta"
