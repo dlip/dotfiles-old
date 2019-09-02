@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/dlip/envy.sh.git
+	branch = master
+	commit = b1a9e8e74e5cd64599e82755202b312306d2a50b
+	parent = 4d85214c92257a5941a3b5b20234251bf187cca0
+	method = merge
+	cmdver = 0.4.0
