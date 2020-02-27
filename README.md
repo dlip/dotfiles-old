@@ -62,5 +62,5 @@ Using extension called [Settings Sync](https://marketplace.visualstudio.com/item
 - Check status of brew services with `brew services list`
 - In .env file there are proxy settings to use cntlm eg. BASH_IT_HTTP_PROXY
 - Run `proxy_enable` to enable the proxy
-- On mac make a network location called 'noproxy' in network preferences
+- On mac make a network location called 'No Proxy' in network preferences, and remove devices you don't want connected eg. LAN
 - Run `proxy_disable` to disable the proxy
