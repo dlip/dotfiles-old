@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # source env file
-dotenv "$HOME/.env"
+eval $(${DOTFILES_DIR}/.bin/vendor/envy.sh/envy.sh "$HOME/.env")
+
 if [ -f "$HOME/.local.env" ]; then
-    dotenv "$HOME/.local.env"
+    eval $(${DOTFILES_DIR}/.bin/vendor/envy.sh/envy.sh "$HOME/.local.env")
 fi
