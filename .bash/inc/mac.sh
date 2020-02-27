@@ -928,6 +928,10 @@ mac_setup() {
     # Bypass the annoyingly slow t.co URL shortener
     # defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false         # For VS Code
+    defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
+    defaults delete -g ApplePressAndHoldEnabled                                      # If necessary, reset global default
+
     ###############################################################################
     # Kill affected applications                                                  #
     ###############################################################################

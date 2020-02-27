@@ -13,7 +13,7 @@
 ## Installation
 
 ```sh
-https://github.com/dlip/dotfiles.git
+git clone https://github.com/dlip/dotfiles.git
 cd dotfiles
 # Check what it will change
 DRY_RUN=true ./install.sh
