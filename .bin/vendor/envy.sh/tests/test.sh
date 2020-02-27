@@ -2,6 +2,14 @@
 
 load '/usr/local/lib/bats/load.bash'
 
+
+TEST_FILE1=test-out.env
+TEST_FILE2=test-out2.env
+teardown() {
+	rm -f "${TEST_FILE1}"
+	rm -f "${TEST_FILE2}"
+}
+
 @test "Given env-file input and bash output, should output variables with export prefix" {
   result="$(../envy.sh basic.env)"
   expected='export ENVIRONMENT=development
@@ -34,10 +42,18 @@ export B=second'
   assert_equal "${result}" "${expected}"
 }
 
-@test "Given env-file input and env-file output, should output variables without export prefix" {
+@test "Given env-file input and env-file output, should output variables with env-file syntax" {
   result="$(../envy.sh basic.env env-file)"
   expected='ENVIRONMENT=development
 VERSION=1.0.0'
+
+  assert_equal "${result}" "${expected}"
+}
+
+@test "Given env-file input and make output, should output variables with make syntax" {
+  result="$(../envy.sh basic.env make)"
+  expected='export ENVIRONMENT:=development
+export VERSION:=1.0.0'
 
   assert_equal "${result}" "${expected}"
 }
@@ -84,7 +100,7 @@ export VERSION=1.0.0'
 
 @test "Given value with special characters and make output, should escape correctly" {
   result="$(../envy.sh escape.env make)"
-  expected='export PASSWORD=$$\\\#GOD\#'\''" =/$$'
+  expected='export PASSWORD:=$$\\#GOD\#'\''" =/$$'
 
   assert_equal "${result}" "${expected}"
 }
@@ -115,10 +131,30 @@ export VERSION=1.0.0'
   assert_equal "${result}" "${expected}"
 }
 
+@test "Given env-file input with templating, should be evaluated" {
+  export VERSION=1.0.0
+  result="$(../envy.sh templating.env)"
+  expected='export DOUBLE=envy-1.0.0-pro
+export DOUBLE_NO_CLOSE=envy-{{VERSION-pro
+export DOUBLE_OPEN={{NAME-1.0.0-pro
+export NAME=envy
+export NOT_TEMPLATE=envy-{{}}-pro
+export NO_CLOSE_END=envy-{{
+export NO_CLOSE_MIDDLE=envy-{{-pro
+export NO_CLOSE_START={{-envy
+export VAR_END=envy-1.0.0
+export VAR_ESCAPE=envy-{{NOTVAR}}-pro
+export VAR_MIDDLE=envy-1.0.0-pro
+export VAR_START=1.0.0-pro
+export VERSION=1.0.0'
+
+  assert_equal "${result}" "${expected}"
+}
+
 @test "Given env-file input with templating and environment variable, should be evaluated" {
-  export APP_VERSION=1.0.0
+  export VERSION=1.0.0
   result="$(../envy.sh templating-env.env)"
-  expected='export VERSION=1.0.0'
+  expected='export NAME=envy-1.0.0'
 
   assert_equal "${result}" "${expected}"
 }
@@ -133,10 +169,34 @@ export VERSION=1.0.0'
 }
 
 
-@test "Given value templated value with special characters and bash output, should escape correctly" {
+@test "Given templated value with special characters and bash output, should escape correctly" {
   result="$(../envy.sh templating-escape.env)"
   expected='export PASSWORD=\$\\#GOD#\'\''\"\ =\/\$
 export TEMPLATED_PASSWORD=templated-\$\\#GOD#\'\''\"\ =\/\$'
 
   assert_equal "${result}" "${expected}"
 }
+
+@test "Given templated value and non-existant variable, should throw error" {
+  run ../envy.sh templating-error.env
+  assert_failure
+}
+
+@test "Given output file, should write to file" {
+  ../envy.sh basic.env env-file test-out.env
+  result="$(cat test-out.env)"
+  expected='ENVIRONMENT=development
+VERSION=1.0.0'
+
+  assert_equal "${result}" "${expected}"
+}
+
+@test "Given output file and run twice, should overwrite the first file" {
+  ../envy.sh basic.env env-file test-out.env
+  ../envy.sh name.env env-file test-out.env
+  result="$(cat test-out.env)"
+  expected='NAME=envy'
+
+  assert_equal "${result}" "${expected}"
+}
+

@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/dlip/envy.sh.git
 	branch = master
-	commit = b1a9e8e74e5cd64599e82755202b312306d2a50b
-	parent = 4d85214c92257a5941a3b5b20234251bf187cca0
+	commit = f574b513caae0590c6063829d0d36ff858217307
+	parent = 7db8920489f6d491e8936ccf99bc57bd341c46c4
 	method = merge
 	cmdver = 0.4.0

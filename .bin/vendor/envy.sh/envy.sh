@@ -3,61 +3,68 @@
 
 set -euo pipefail
 
-OUTPUT="${2:-bash}"
 ENVY_NAMESPACE="__ENVY_"
+OUTPUT_FORMAT="${2:-bash}"
+OUTPUT="${3:-/dev/stdout}"
 
-# Taken from https://github.com/jwerle/mush
-mush () {
-  local SELF="$0"
-  local NULL=/dev/null
-  local STDIN=0
-  local STDOUT=1
-  local STDERR=2
-  local LEFT_DELIM="{{"
-  local RIGHT_DELIM="}}"
-  local INDENT_LEVEL="  "
-  local ENV="`env`"
-  local out=">&$STDOUT"
+template () {
+    local RESULT=""
+    local LAST_CHAR=""
 
-  ## read each line
-  while IFS= read -r line; do
-    printf '%q\n' "${line}" | {
-        ## read each ENV variable
-        echo "$ENV" | {
-          while read var; do
-            ## split each ENV variable by '='
-            ## and parse the line replacing
-            ## occurrence of the key with
-            ## guarded by the values of
-            ## `LEFT_DELIM' and `RIGHT_DELIM'
-            ## with the value of the variable
-            case "$var" in
-              (*"="*)
-                key=${var%%"="*}
-                val=${var#*"="*}
-                ;;
+    # Read input char by char
+    while read -n1 CHAR; do
+        # If found {{
+        if [[ "${CHAR}" == "{" && "${LAST_CHAR}" == "{" ]]; then
+            # Remove extra {
+            RESULT="${RESULT%?}"
+            local VAR_RESULT=""
+            local VAR_LAST_CHAR=""
+            local VAR_FOUND=false
+            # Search for }}
+            while read -n1 VAR_CHAR; do
+                # If found }}
+                if [[ "${VAR_CHAR}" == "}" && "${VAR_LAST_CHAR}" == "}" ]]; then
+                    VAR_FOUND=true
+                    # Remove extra }
+                    VAR="${VAR_RESULT%?}"
+                    # Check for no variable, assume not a template
+                    if [ "${VAR}" == "" ]; then
+                        VAR_RESULT="{{}}"
+                    # Check for escaping
+                    elif [[ "${VAR:0:1}" == '\' ]]; then
+                        VAR_RESULT="{{${VAR:1}}}"
+                    else
+                        # Lookup value
+                        V=$(printenv "${VAR}")
+                        # Throw error if not set
+                        if [ -z "${V}" ]; then
+                            echo "Error while parsing tempate, ${VAR} not set" >&2
+                            exit 1
+                        fi
+                        VAR_RESULT="${V}"
+                    fi
+                    break
+                # If find another {{ assume this is not a template and continue on to the next pair
+                elif [[ "${VAR_CHAR}" == "{" && "${VAR_LAST_CHAR}" == "{" ]]; then
+                    RESULT+="{{${VAR_RESULT%?}"
+                    VAR_RESULT=""
+                else
+                    VAR_RESULT+="${VAR_CHAR}"
+                fi
+                VAR_LAST_CHAR="${VAR_CHAR}"
+            done
+            # If VAR never found, add back the open {{
+            if [ "${VAR_FOUND}" == "false" ]; then
+                RESULT+="{{"
+            fi
+            RESULT+="${VAR_RESULT}"
+        else
+            RESULT+="${CHAR}"
+        fi
+        LAST_CHAR="${CHAR}"
+    done
 
-              (*)
-                key=$var
-                val=
-                ;;
-            esac
-
-            line="${line//${LEFT_DELIM}$key${RIGHT_DELIM}/$val}"
-          done
-
-          ## output to stdout
-          echo "$line" | {
-            ## parse undefined variables
-            sed -e "s#${LEFT_DELIM}[A-Za-z]*${RIGHT_DELIM}##g" | \
-            ## parse comments
-            sed -e "s#${LEFT_DELIM}\!.*${RIGHT_DELIM}##g" | \
-            ## escaping
-            sed -e 's/\\\"/""/g'
-          };
-        }
-    };
-  done
+    echo "${RESULT}"
 }
 
 bash_escape() {
@@ -81,14 +88,11 @@ process_input() {
     while read -r PAIR; do
         K=${PAIR%%"="*}
         V=${PAIR#*"="*}
-        # Check if templating
-        if grep -q "{{.*}}" <<< "${V}"; then
-            V=$(mush <<< "${V}")
-        fi
+        V=$(template <<< $(bash_escape "${V}"))
         if grep -q "^_INCLUDE" <<< "${K}"; then
             process_input "${V}"
         else
-            export ${K}="$(bash_escape "${V}")"
+            export ${K}="${V}"
             export ${ENVY_NAMESPACE}${K}="${V}"
         fi
     done <<< "${CONTENTS}"
@@ -98,19 +102,23 @@ process_input() {
 }
 
 process_output() {
+    if [ "${OUTPUT}" != "/dev/stdout" ]; then
+        rm -f "${OUTPUT}"
+    fi
+
     ENVY_ENV=$(env | sort | grep "^${ENVY_NAMESPACE}" | sed "s/^${ENVY_NAMESPACE}\([^=]*\)=.*/\1/")
     while read -r K; do
         V=$(printenv "${ENVY_NAMESPACE}${K}")
-        if [ "${OUTPUT}" == "bash" ]; then
-            echo "export ${K}=$(bash_escape "${V}")"
-        elif [ "${OUTPUT}" == "env-file" ]; then
-            echo "${K}=${V}"
-        elif [ "${OUTPUT}" == "make" ]; then
+        if [ "${OUTPUT_FORMAT}" == "bash" ]; then
+            echo "export ${K}=$(bash_escape "${V}")" >> $OUTPUT
+        elif [ "${OUTPUT_FORMAT}" == "env-file" ]; then
+            echo "${K}=${V}" >> $OUTPUT
+        elif [ "${OUTPUT_FORMAT}" == "make" ]; then
             MAKE_ESCAPED_VALUE=$(sed 's/\([$]\)/$\1/g' <<< "${V}")
-            MAKE_ESCAPED_VALUE=$(sed 's/\([#\\]\)/\\\1/g' <<< "${MAKE_ESCAPED_VALUE}")
-            echo "export ${K}=${MAKE_ESCAPED_VALUE}"
+            MAKE_ESCAPED_VALUE=$(sed 's/\([#]\)/\\\1/g' <<< "${MAKE_ESCAPED_VALUE}")
+            echo "export ${K}:=${MAKE_ESCAPED_VALUE}" >> $OUTPUT
         else
-            echo "Unknown output format '${OUTPUT}'"
+            echo "Unknown output format '${OUTPUT_FORMAT}'"
             exit 1
         fi
     done <<< "${ENVY_ENV}"
@@ -120,9 +128,10 @@ if [ -n "${1:-}" ]; then
     process_input "${1}"
     process_output
 else
-    echo "envy.sh v2.0.0"
-    echo "Usage: envy.sh input [output-format]"
+    echo "envy.sh v2.1.3"
+    echo "Usage: envy.sh input [output-format] [output-file]"
     echo "Valid inputs: env-file, vault"
     echo "Valid output formats: bash (default), make, env-file"
     echo "See project for details: https://github.com/dlip/envy.sh"
 fi
+

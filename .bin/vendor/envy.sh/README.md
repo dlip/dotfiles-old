@@ -1,14 +1,14 @@
-# [envy.sh](https://github.com/dlip/envy.sh)🤵
+# [envy.sh](https://github.com/dlip/envy.sh)
 
-Stylish environment variable loading
+Env-like configuration with superpowers 🦸
 
 [![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/dlip/envy.sh)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/dlip/envy.sh)
 
 ## Features
 
-- Import other files
-- Import Vault secrets
-- Templating
+- Include other files
+- Include Vault secrets
+- Simple templating (variables only, no complex logic)
 
 ## Example
 
@@ -40,7 +40,7 @@ export VERSION=1.0.0
 ## Requirements
 
 - bash
-- If using vault: 
+- If using vault:
     - [vault](https://www.vaultproject.io/docs/install/)
     - [jq](https://github.com/stedolan/jq)
 - Alternatively you can use the [docker](https://docs.docker.com/install/) [image](https://cloud.docker.com/u/dlip/repository/docker/dlip/envy.sh) which contains all the dependencies. To create an alias called `envy.sh` run:
@@ -60,13 +60,13 @@ chmod +x ./envy.sh
 ### basic
 
 ```
-./envy.sh input [output-format]
+./envy.sh input [output-format] [output-file]
 ```
 
 - [Supported Inputs](#supported-inputs)
 - [Supported Ouput Formats](#supported-output-formats)
 
-### bash 
+### bash
 
 Import environment variables to current shell
 
@@ -82,9 +82,20 @@ bash -c 'eval $(bin/envy.sh .env) && env'
 
 ### make
 
+You can use the following to create a `.envy.mk` file and include it in your Makefile. Also add `.envy.mk` to your `.gitignore` file. Note: the dependency on `$(CONFIG)` here is quite simplistic so if your `.env` has any includes that change, you will need to run `make clean` to recreate the file.
+
 ```
 export CONFIG ?= .env
-$(foreach var,$(shell ./envy.sh $(CONFIG) make),$(eval $(var)))
+
+ENVY_MK := .envy.mk
+$(ENVY_MK): $(CONFIG)
+	envy.sh $(CONFIG) make $@
+
+-include $(ENVY_MK)
+
+.PHONY: clean
+clean:
+	-rm -f $(ENVY_MK)
 ```
 
 ## Supported Inputs
@@ -154,7 +165,7 @@ VERSION=1.0.0
 NAME=envy-{{VERSION}}
 ```
 
-To write a literal `{{`, escape it by putting it between curly braces `{{{{}}`
+To write a literal `{{VERSION}}`, escape it with a backslash i.e. `{{\VERSION}}`
 
 ## Variable Precedence
 
@@ -163,6 +174,27 @@ To write a literal `{{`, escape it by putting it between curly braces `{{{{}}`
 - Lines are sorted alphabetically before the output is written for consistency
 
 ## Changelog
+
+### [v2.1.3 (2020-01-31)](https://github.com/dlip/envy.sh/releases/tag/v2.1.3)
+
+- Bugfix Makefile backslash escape correction
+
+### [v2.1.2 (2019-12-06)](https://github.com/dlip/envy.sh/releases/tag/v2.1.2)
+
+- Bugfix Bash v3.2.57 compatibility
+
+### [v2.1.1 (2019-09-10)](https://github.com/dlip/envy.sh/releases/tag/v2.1.1)
+
+- Bugfix change make variables to be the simply expanded type
+
+### [v2.1.0 (2019-09-09)](https://github.com/dlip/envy.sh/releases/tag/v2.1.0)
+
+- Add argument to output to a file to help with Makefile includes
+
+### [v2.0.1 (2019-09-03)](https://github.com/dlip/envy.sh/releases/tag/v2.0.1)
+
+- Rewrite templating to be more efficient
+- Bugfix: Throw error when template variable not set
 
 ### [v2.0.0 (2019-08-28)](https://github.com/dlip/envy.sh/releases/tag/v2.0.0)
 
@@ -195,3 +227,4 @@ To write a literal `{{`, escape it by putting it between curly braces `{{{{}}`
 ## Licence
 
 MIT Licence. See [LICENCE](LICENCE) for details
+
