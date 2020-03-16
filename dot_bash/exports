@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export _HTTP_PROXY=http://127.0.0.1:3128
+export _HTTPS_PROXY=http://127.0.0.1:3128
+export _NO_PROXY="localhost, 127.0.0.*, 10.*, 192.168.*, .cba, .cbainet.com"
