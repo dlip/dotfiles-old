@@ -17,7 +17,7 @@ plugins=(
     git
 )
 
-ZSH_THEME=powerlevel9k/powerlevel9k
+ZSH_THEME="powerlevel9k/powerlevel9k"
 DISABLE_AUTO_UPDATE="true"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs virtualenv status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
